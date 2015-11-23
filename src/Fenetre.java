@@ -15,7 +15,8 @@ public class Fenetre extends JFrame {
     //section sup
     int nbJoueur =3;
     protected JLabel esp[][] = new JLabel[22][22];
-    protected JPanel espA[][] = new JPanel[22][22];;
+    protected JPanel espA[][] = new JPanel[22][22];
+    protected JPanel espB[][] = new JPanel[22][22];
     //section bas
 
     protected JButton TotalAs,TotalDeux,TotalTrois,TotalQuatre,TotalCinq, TotalSix,Brelan,Carre, Full, PSuite, GSuite, Yahtzee, Chance;
@@ -26,6 +27,7 @@ public class Fenetre extends JFrame {
     protected JCheckBox F1;
     //protected JButton G1;
     protected ControlButton control = new ControlButton(model,this);
+    protected ControlButton controlA = new ControlButton(model,this);
     protected ControlMenu control2 = new ControlMenu(this);
     protected JMenuBar menuBar;
     protected JMenu option;
@@ -62,14 +64,38 @@ public class Fenetre extends JFrame {
         dé3 = new JLabel("_");
         dé4 = new JLabel("_");
         dé5 = new JLabel("_");
-
-        //création des cases score
-
-
-
+        Total = new JLabel("Total");
         //lancer de dé
         lancer = new JButton("Lancer");
         lancer.addActionListener(control);
+
+        //bouton partie droite
+        TotalAs = new JButton("Total des AS");
+        TotalAs.addActionListener(controlA);
+        TotalDeux = new JButton("Total des DEUX");
+        TotalDeux.addActionListener(controlA);
+        TotalTrois = new JButton("Total des TROIS");
+        TotalTrois.addActionListener(controlA);
+        TotalQuatre = new JButton("Total des QUATRE");
+        TotalQuatre.addActionListener(controlA);
+        TotalCinq = new JButton("Total des CINQ");
+        TotalCinq.addActionListener(controlA);
+        TotalSix = new JButton("Total des SIX");
+        TotalSix.addActionListener(controlA);
+        Brelan = new JButton("Brelan - Total des 5 dés");
+        Brelan.addActionListener(controlA);
+        Carre = new JButton("Carré - Total des 5 dés");
+        Carre.addActionListener(controlA);
+        Full = new JButton("Full - 25 point");
+        Full.addActionListener(controlA);
+        PSuite = new JButton("Petite suite - 30 points");
+        PSuite.addActionListener(controlA);
+        GSuite = new JButton("Grande suite - 40 points");
+        GSuite.addActionListener(controlA);
+        Yahtzee = new JButton("Yahtzee - 50 points");
+        Yahtzee.addActionListener(controlA);
+        Chance = new JButton("Chance - Total des 5 dés");
+        Chance.addActionListener(controlA);
 
 
         //partie sup
@@ -109,37 +135,30 @@ public class Fenetre extends JFrame {
 
         JPanel PanoB2 = new JPanel();
         PanoB2.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalAs = new JButton("Total des AS");
         PanoB2.add(TotalAs);
 
         JPanel PanoB3 = new JPanel();
         PanoB3.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalDeux = new JButton("Total des DEUX");
         PanoB3.add(TotalDeux);
 
         JPanel PanoB4 = new JPanel();
         PanoB4.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalTrois = new JButton("Total des TROIS");
         PanoB4.add(TotalTrois);
 
         JPanel PanoB5 = new JPanel();
         PanoB5.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalQuatre = new JButton("Total des QUATRE");
         PanoB5.add(TotalQuatre);
 
         JPanel PanoB6 = new JPanel();
         PanoB6.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalCinq = new JButton("Total des CINQ");
         PanoB6.add(TotalCinq);
 
         JPanel PanoB7 = new JPanel();
         PanoB7.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalSix = new JButton("Total des SIX");
         PanoB7.add(TotalSix);
 
         JPanel PanoB8 = new JPanel();
         PanoB8.setBorder(BorderFactory.createLineBorder(Color.black));
-        Total = new JLabel("Total");
         PanoB8.add(Total);
 
         JPanel PanoB9 = new JPanel();
@@ -165,37 +184,30 @@ public class Fenetre extends JFrame {
 
         JPanel PanoA2 = new JPanel();
         PanoA2.setBorder(BorderFactory.createLineBorder(Color.black));
-        Brelan = new JButton("Brelan - Total des 5 dés");
         PanoA2.add(Brelan);
 
         JPanel PanoA3 = new JPanel();
         PanoA3.setBorder(BorderFactory.createLineBorder(Color.black));
-        Carre = new JButton("Carré - Total des 5 dés");
         PanoA3.add(Carre);
 
         JPanel PanoA4 = new JPanel();
         PanoA4.setBorder(BorderFactory.createLineBorder(Color.black));
-        Full = new JButton("Full - 25 point");
         PanoA4.add(Full);
 
         JPanel PanoA5 = new JPanel();
         PanoA5.setBorder(BorderFactory.createLineBorder(Color.black));
-        PSuite = new JButton("Petite suite - 30 points");
         PanoA5.add(PSuite);
 
         JPanel PanoA6 = new JPanel();
         PanoA6.setBorder(BorderFactory.createLineBorder(Color.black));
-        GSuite = new JButton("Grande suite - 40 points");
         PanoA6.add(GSuite);
 
         JPanel PanoA7 = new JPanel();
         PanoA7.setBorder(BorderFactory.createLineBorder(Color.black));
-        Yahtzee = new JButton("Yahtzee - 50 points");
         PanoA7.add(Yahtzee);
 
         JPanel PanoA8 = new JPanel();
         PanoA8.setBorder(BorderFactory.createLineBorder(Color.black));
-        Chance = new JButton("Chance - Total des 5 dés");
         PanoA8.add(Chance);
 
         JPanel PanoA9 = new JPanel();
@@ -283,12 +295,15 @@ public class Fenetre extends JFrame {
                     esp[j][k].setText("joueur "+num );
                 }
                 else{
-                esp[j][k].setText("0");}
+                esp[j][k].setText("_");}
 
                 espA[j][k]= new JPanel();
-                espA[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
+                //espA[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
                 espA[j][k].add(esp[j][k]);
-                player.add(espA[j][k]);
+                espB[j][k]= new JPanel();
+                espB[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
+                espB[j][k].add(espA[j][k]);
+                player.add(espB[j][k]);
             }
 
         }
@@ -421,116 +436,4 @@ public class Fenetre extends JFrame {
 
     }
 }
-//pubel mais peu etre utile
-   /*txtsectionsup[i] = new JTextField();
-            txtsectionsup[i].setColumns(10);
-            txtTotalAs[i] = new JTextField();
-            txtTotalAs[i].setColumns(10);
-            txtTotalDeux[i] = new JTextField();
-            txtTotalDeux[i].setColumns(10);
-            txtTotalTrois[i] = new JTextField();
-            txtTotalTrois[i].setColumns(10);
-            txtTotalQuatre[i] = new JTextField();
-            txtTotalQuatre[i].setColumns(10);
-            txtTotalCinq[i] = new JTextField();
-            txtTotalCinq[i].setColumns(10);
-            txtTotalSix[i] = new JTextField();
-            txtTotalSix[i].setColumns(10);
-            txtTotal[i] = new JTextField();
-            txtTotal[i].setColumns(10);
-            txtPrime35[i] = new JTextField();
-            txtPrime35[i].setColumns(10);
-            txtTotalsectionSup[i] = new JTextField();
-            txtTotalsectionSup[i].setColumns(10);
-
-            //section bass
-
-            txtBrelan[i] = new JTextField();
-            txtBrelan[i].setColumns(10);
-            txtCarre[ni] = new JTextField();
-            txtCarre[i].setColumns(10);
-            txtFull[i] = new JTextField();
-            txtCarre[i].setColumns(10);
-            txtPSuite[i] = new JTextField();
-            txtPSuite[i].setColumns(10);
-            txtGSuite[i] = new JTextField();
-            txtGSuite[i].setColumns(10);
-            txtYahtzee[i] = new JTextField();
-            txtYahtzee[i].setColumns(10);
-            txtChance[i] = new JTextField();
-            txtChance[i].setColumns(10);
-            txtPrime100[i] = new JTextField();
-            txtPrime100[i].setColumns(10);
-            txtTotalInf[i] = new JTextField();
-            txtTotalInf[i].setColumns(10);
-            txtTotalFinal[i] = new JTextField();
-            txtTotalFinal[i].setColumns(10);
-
-             for (int j = 0; j <nbJoueur ; j++) {
-            txtsectionsup[i] = new JLabel("0");
-            txtTotalAs[i] = new JLabel("0");
-            txtTotalDeux[i] = new JLabel("0");
-            txtTotalTrois[i] = new JLabel("0");
-            txtTotalQuatre[i] = new JLabel("0");
-            txtTotalCinq[i] = new JLabel("0");
-            txtTotalSix[i] = new JLabel("0");
-            txtTotal[i] = new JLabel("0");
-            txtPrime35[i] = new JLabel("0");
-            txtTotalsectionSup[i] = new JLabel("0");
-            txtBrelan[i] = new JLabel("0");
-            txtCarre[i] = new JLabel("0");
-            txtFull[i] = new JLabel("0");
-            txtPSuite[i] = new JLabel("0");
-            txtGSuite[i] = new JLabel("0");
-            txtYahtzee[i] = new JLabel("0");
-            txtChance[i] = new JLabel("0");
-            txtPrime100[i] = new JLabel("0");
-            txtTotalInf[i] = new JLabel("0");
-            txtTotalFinal[i] = new JLabel("0");
-
-        }
-            txtsectionsup[],txtTotalAs[],txtTotalDeux[],txtTotalTrois[],txtTotalQuatre[],txtTotalCinq[],txtTotalSix[],txtTotal[],txtPrime35[],txtTotalsectionSup[]
-             protected JLabel txtBrelan[],txtCarre[],txtFull[],txtPSuite[],txtGSuite[],txtYahtzee[],txtChance[],txtPrime100[],txtTotalInf[],txtTotalFinal[];
-            */
-
-/* TotalAs.addActionListener(listener);
-        TotalDeux.addActionListener(listener);
-        TotalTrois.addActionListener(listener);
-        TotalQuatre.addActionListener(listener);
-        TotalCinq.addActionListener(listener);
-        TotalSix.addActionListener(listener);
-        Total.addActionListener(listener);
-        Brelan.addActionListener(listener);
-        Carre.addActionListener(listener);
-        Full.addActionListener(listener);
-        PSuite.addActionListener(listener);
-        GSuite.addActionListener(listener);
-        Yahtzee.addActionListener(listener);
-        Chance.addActionListener(listener);
-        PrimeY.addActionListener(listener);
-        Prime35.addActionListener(listener);
-        TotalInf.addActionListener(listener);
-        TotalSup.addActionListener(listener);
-        TotalSup2.addActionListener(listener);*/
-
- /*  player.add(joueur2[i]);
-            player.add(txtBrelan[i]);
-            player.add(txtCarre[i]);
-            player.add(txtFull[i]);
-            player.add(txtPSuite[i]);
-            player.add(txtGSuite[i]);
-            player.add(txtYahtzee[i]);
-            player.add(txtChance[i]);
-            player.add(txtPrime100[i]);
-            player.add(txtTotalInf[i]);*/
-
- /* player.add(txtTotalAs[i]);
-            player.add(txtTotalDeux[i]);
-            player.add(txtTotalTrois[i]);
-            player.add(txtTotalQuatre[i]);
-            player.add(txtTotalCinq[i]);
-            player.add(txtTotalSix[i]);
-            player.add(txtTotal[i]);
-            player.add(txtPrime35[i]);
-            player.add(txtTotalsectionSup[i]);*/
 

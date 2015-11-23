@@ -5,18 +5,20 @@ import java.util.Random;
  */
 public class De {
     private Random rand;
+    protected int chiffre;
 
-    private int jette() {
-        int max = 78;
+    De(){
+        int chiffre=0;
+    }
+
+    public int getChiffre(){
+        return chiffre;
+    }
+
+    protected int setChiffre() {
+        int max = 6;
         int min = 1;
-        return rand.nextInt((max - min) + 1) + min;
+        return chiffre=rand.nextInt((max - min) + 1) + min;
     }
 
-    public int[] cinq_jette(){
-        int[] tmp = new int[5];
-        for (int i = 0; i < 5; i++) {
-            tmp[i] = jette();
-        }
-        return tmp;
-    }
 }
