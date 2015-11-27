@@ -13,7 +13,7 @@ public class Fenetre extends JFrame {
     protected JCheckBox A1,A2,A3,A4,A5;
     protected int i;
     //section sup
-    int nbJoueur =3;
+    //int nbJoueur =3;
     protected JLabel esp[][] = new JLabel[22][22];
     protected JPanel espA[][] = new JPanel[22][22];
     protected JPanel espB[][] = new JPanel[22][22];
@@ -25,20 +25,20 @@ public class Fenetre extends JFrame {
     protected JButton lancer;
     protected JComboBox<String> E1;
     protected JCheckBox F1;
-    //protected JButton G1;
-    protected ControlButton control = new ControlButton(model,this);
-    protected ControlButton controlA = new ControlButton(model,this);
-    protected ControlMenu control2 = new ControlMenu(this);
     protected JMenuBar menuBar;
     protected JMenu option;
     protected JMenuItem itemInterface1, itemInterface2, itemComment, itemApropos;
     protected JMenu itemAide;
     protected ImageIcon img1,img2;
+    //protected JButton G1;
+    protected ControlButton control;
+    protected ControlButton controlA;
+    protected ControlMenu control2 = new ControlMenu(this);
 
 
     public Fenetre(Model model) {
 
-        model = model;
+        this.model = model;
         initAttribut();
         creerMenu();
         creerWidget2();
@@ -49,9 +49,13 @@ public class Fenetre extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
     }
 
     public void initAttribut(){
+
+        control = new ControlButton(model,this);
+        controlA = new ControlButton(model,this);
 
         A1 = new JCheckBox("1",false);
         A2 = new JCheckBox("2",false);
@@ -284,9 +288,9 @@ public class Fenetre extends JFrame {
         PanoC1.add(PanoCC1);
 
         //grille1
-        JPanel player= new JPanel(new GridLayout(22,nbJoueur));
+        JPanel player= new JPanel(new GridLayout(22, model.getNbJoueur()));
         for (int j = 0; j <esp.length; j++) {
-            for (int k = 0; k <nbJoueur; k++) {
+            for (int k = 0; k <model.getNbJoueur(); k++) {
 
                 esp[j][k]= new JLabel();
                // esp[j][k].setBorder(BorderFactory.createLineBorder(Color.black));

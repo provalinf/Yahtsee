@@ -1,22 +1,15 @@
 /**
- * Created by nico on 21/11/15.
+ * Created by nrossdeu on 02/11/15.
  */
-public class Joueur {
+public class joueur {
     public int score;
-    public int position;
+    public String name;
 
-    public Joueur(int pos){
+    public joueur(){
         score = 0;
-        this.position = pos;
+        this.name = "";
     }
 
-    public int getScore(){
-        return this.score;
-    }
-
-    public void setScore(){
-        this.score=score;
-    }
 
 
 }
