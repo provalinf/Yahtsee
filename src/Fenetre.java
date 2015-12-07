@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class Fenetre extends JFrame {
     protected Model model;
 
-    private Panel pan = new Panel(new GridBagLayout());
+    protected Panel pan = new Panel(new GridBagLayout());
     protected JCheckBox A1,A2,A3,A4,A5;
     protected int i;
     //section sup
@@ -20,16 +20,15 @@ public class Fenetre extends JFrame {
     //section bas
 
     protected JButton TotalAs,TotalDeux,TotalTrois,TotalQuatre,TotalCinq, TotalSix,Brelan,Carre, Full, PSuite, GSuite, Yahtzee, Chance;
-    protected JLabel joueur ,joueur2 ,vide , PrimeY, Prime35, TotalInf,TotalSup, TotalSup2, Total;
+    protected JLabel joueur ,joueur2 ,vide , PrimeY, Prime35, TotalInf,TotalSup, TotalSup2, Total,Info3;
     protected JLabel dé1, dé2, dé3, dé4, dé5;
     protected JButton lancer;
     protected JComboBox<String> E1;
     protected JCheckBox F1;
     protected JMenuBar menuBar;
     protected JMenu option;
-    protected JMenuItem itemInterface1, itemInterface2, itemComment, itemApropos;
+    protected JMenuItem itemInterface1, itemInterface2,itemInterface3, itemInterface4,itemInterface5, itemComment, itemApropos;
     protected JMenu itemAide;
-    protected ImageIcon img1,img2;
     //protected JButton G1;
     protected ControlButton control;
     protected ControlButton controlA;
@@ -42,7 +41,6 @@ public class Fenetre extends JFrame {
         initAttribut();
         creerMenu();
         creerWidget2();
-
         this.setResizable(true);
         pack();
         setTitle("Yahtsee");
@@ -105,26 +103,31 @@ public class Fenetre extends JFrame {
         //partie sup
         joueur = new JLabel("joueur");
         vide= new JLabel(" ");
+        Info3 = new JLabel("tour du joueur 1");
 
         String[] Option = new String[]{"Latin", "Grec", "Sport"};
         E1 = new JComboBox<String>(Option);
 
         F1 = new JCheckBox("", true);
 
-       // G1= new JButton("Moyenne");
+        // G1= new JButton("Moyenne");
 
         menuBar = new JMenuBar();
         option = new JMenu("Option");
-        img1 = new ImageIcon("version1.gif");
-        setItemInterface1(new JMenuItem("Version 1",img1));
-        img2 = new ImageIcon("version2.gif");
-        itemInterface2 = new JMenuItem("Version 2",img2);
+        setItemInterface1(new JMenuItem("2 joueurs"));
+        itemInterface2 = new JMenuItem("3 joueur");
+        itemInterface3 = new JMenuItem("4 joueur");
+        itemInterface4 = new JMenuItem("5 joueur");
+        itemInterface5 = new JMenuItem("6 joueur");
         itemAide = new JMenu("Aide");
         itemComment = new JMenuItem("Comment ça marche?");
         itemApropos = new JMenuItem("A propos");
-       // G1.addActionListener((ActionListener) control);
+        // G1.addActionListener((ActionListener) control);
         getItemInterface1().addActionListener(control2);
         itemInterface2.addActionListener(control2);
+        itemInterface3.addActionListener(control2);
+        itemInterface4.addActionListener(control2);
+        itemInterface5.addActionListener(control2);
         itemAide.addActionListener(control2);
     }
 
@@ -226,16 +229,9 @@ public class Fenetre extends JFrame {
 
         JPanel PanoA11 = new JPanel();
         PanoA11.setBorder(BorderFactory.createLineBorder(Color.black));
-        TotalSup2 = new JLabel("Total de la section supérieur");
+        TotalSup2 = new JLabel("Total Final");
         PanoA11.add(TotalSup2);
 
-      //  JPanel PanoA12 = new JPanel();
-
-
-        JPanel PanoCC1 = new JPanel();
-        PanoCC1.setBorder(BorderFactory.createLineBorder(Color.black));
-        JButton TotalGen = new JButton("Total Général");
-        PanoCC1.add(TotalGen);
 
         //création de la partie des Dés
         //partie des checkbox et des label d'affichage
@@ -284,22 +280,33 @@ public class Fenetre extends JFrame {
         PartieD6.setBorder(BorderFactory.createLineBorder(Color.black));
         PartieD6.add(lancer);
 
-        JPanel PanoC1 = new JPanel();
-        PanoC1.add(PanoCC1);
+        //panneau d'info du joueur
+        JPanel PanoInfo = new JPanel();
+        JPanel PanoInfo2 = new JPanel();
 
-        //grille1
-        JPanel player= new JPanel(new GridLayout(22, model.getNbJoueur()));
+        PanoInfo2.setBorder(BorderFactory.createLineBorder(Color.black));
+        PanoInfo2.add(Info3);
+        PanoInfo.add(PanoInfo2);
+
+
+        JPanel PanoC1 = new JPanel();
+        //PanoC1.add(PanoCC1);
+
+
+        //grille des joueurs
+        JPanel player= new JPanel(new GridLayout(22, model.j.getNbJoueur()));
         for (int j = 0; j <esp.length; j++) {
-            for (int k = 0; k <model.getNbJoueur(); k++) {
+            for (int k = 0; k <model.j.getNbJoueur(); k++) {
 
                 esp[j][k]= new JLabel();
-               // esp[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
+                // esp[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
                 if(esp[j][k]==esp[0][k]){
                     int num=k+1;
                     esp[j][k].setText("joueur "+num );
+                    esp[j][k].setOpaque(false);
                 }
                 else{
-                esp[j][k].setText("_");}
+                    esp[j][k].setText("_");}
 
                 espA[j][k]= new JPanel();
                 //espA[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -311,66 +318,64 @@ public class Fenetre extends JFrame {
             }
 
         }
-        
-     //   player.add(joueur);
+
+        //   player.add(joueur);
 
 
         //grille2
-        JPanel partie= new JPanel(new GridLayout(6,1));
+        JPanel partie= new JPanel(new GridLayout(7,1));
 
-            partie.add(PartieD1);
-            partie.add(PartieD2);
-            partie.add(PartieD3);
-            partie.add(PartieD4);
-            partie.add(PartieD5);
-            partie.add(PartieD6);
+        partie.add(PartieD1);
+        partie.add(PartieD2);
+        partie.add(PartieD3);
+        partie.add(PartieD4);
+        partie.add(PartieD5);
+        partie.add(PartieD6);
+        partie.add(PanoInfo);
 
         //affichage partie h affichage de gauche
         JPanel PanoSecSup = new JPanel(new GridLayout(22, 1));
-            PanoSecSup.setBorder(BorderFactory.createLineBorder(Color.black));
-            PanoSecSup.add(PanoB1);
-            PanoSecSup.add(PanoB2);
-            PanoSecSup.add(PanoB3);
-            PanoSecSup.add(PanoB4);
-            PanoSecSup.add(PanoB5);
-            PanoSecSup.add(PanoB6);
-            PanoSecSup.add(PanoB7);
-            PanoSecSup.add(PanoB8);
-            PanoSecSup.add(PanoB9);
-            PanoSecSup.add(PanoB10);
-            PanoSecSup.add(PanoB11);
-            PanoSecSup.add(PanoA1);
-            PanoSecSup.add(PanoA2);
-            PanoSecSup.add(PanoA3);
-            PanoSecSup.add(PanoA4);
-            PanoSecSup.add(PanoA5);
-            PanoSecSup.add(PanoA6);
-            PanoSecSup.add(PanoA7);
-            PanoSecSup.add(PanoA8);
-            PanoSecSup.add(PanoA9);
-            PanoSecSup.add(PanoA10);
-            PanoSecSup.add(PanoA11);
-
-
-
+        PanoSecSup.setBorder(BorderFactory.createLineBorder(Color.black));
+        PanoSecSup.add(PanoB1);
+        PanoSecSup.add(PanoB2);
+        PanoSecSup.add(PanoB3);
+        PanoSecSup.add(PanoB4);
+        PanoSecSup.add(PanoB5);
+        PanoSecSup.add(PanoB6);
+        PanoSecSup.add(PanoB7);
+        PanoSecSup.add(PanoB8);
+        PanoSecSup.add(PanoB9);
+        PanoSecSup.add(PanoB10);
+        PanoSecSup.add(PanoB11);
+        PanoSecSup.add(PanoA1);
+        PanoSecSup.add(PanoA2);
+        PanoSecSup.add(PanoA3);
+        PanoSecSup.add(PanoA4);
+        PanoSecSup.add(PanoA5);
+        PanoSecSup.add(PanoA6);
+        PanoSecSup.add(PanoA7);
+        PanoSecSup.add(PanoA8);
+        PanoSecSup.add(PanoA9);
+        PanoSecSup.add(PanoA10);
+        PanoSecSup.add(PanoA11);
 
 
         JPanel Capsule1 = new JPanel();
-            Capsule1.add(PanoSecSup);
+        Capsule1.add(PanoSecSup);
         JPanel Capsule2 = new JPanel();
-            Capsule2.add(partie);
+        Capsule2.add(partie);
         JPanel Capsule3 = new JPanel();
-            Capsule3.add(player);
+        Capsule3.add(player);
        /* JPanel Capsule4 = new JPanel();
         Capsule4.add(player2);*/
 
         JPanel affichage = new JPanel(new GridLayout(1,3));
-            affichage.add(Capsule1);
-            affichage.add(Capsule3);
-            affichage.add(Capsule2);
+        affichage.add(Capsule1);
+        affichage.add(Capsule3);
+        affichage.add(Capsule2);
        /* affichage.add(Capsule4);*/
         JPanel affichage2 = new JPanel();
-            affichage2.add(affichage);
+        affichage2.add(affichage);
 
         setContentPane(affichage2);
 
@@ -378,9 +383,7 @@ public class Fenetre extends JFrame {
 
     public void creerDialogue(String dtexte) {
         JOptionPane d = new JOptionPane();
-        d.showMessageDialog(this, dtexte, "Erreur",
-                JOptionPane.ERROR_MESSAGE);
-
+        d.showMessageDialog(this, dtexte, "Erreur", JOptionPane.ERROR_MESSAGE);
         JDialog fenErr = d.createDialog(this, "Erreur");
     }
 
@@ -388,6 +391,9 @@ public class Fenetre extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         option.add(getItemInterface1());
         option.add(itemInterface2);
+        option.add(itemInterface3);
+        option.add(itemInterface4);
+        option.add(itemInterface5);
         option.add(itemAide);
         itemAide.add(itemComment);
         itemAide.add(itemApropos);
@@ -399,20 +405,65 @@ public class Fenetre extends JFrame {
 
         switch(Version){
             case 1:
+                model.j.setNbJoueur(2);
                 pan.removeAll();
+                model.j.initJoueur();
+                model.s.initScore(model.j.getJoueur());
+                model.d.initLancer();
+                System.out.println(model.j.nbJoueur);
+                creerWidget2();
                 pack();
                 setVisible(true);
+                repaint();
                 break;
 
             case 2:
+                model.j.setNbJoueur(3);
                 pan.removeAll();
+                model.j.initJoueur();
+                model.s.initScore(model.j.getJoueur());
+                model.d.initLancer();
+                System.out.println(model.j.nbJoueur);
+                creerWidget2();
+                pack();
+                setVisible(true);
+                repaint();
+                break;
+
+            case 3:
+                model.j.setNbJoueur(4);
+                pan.removeAll();
+                model.j.initJoueur();
+                model.s.initScore(model.j.getJoueur());
+                model.d.initLancer();
+                System.out.println(model.j.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
                 break;
 
-            case 3:
-                creerDialogue(" créer par nico");
+            case 4:
+                pan.removeAll();
+                model.j.setNbJoueur(5);
+                model.j.initJoueur();
+                model.d.initLancer();
+                model.s.initScore(model.j.getJoueur());
+                System.out.println(model.j.nbJoueur);
+                creerWidget2();
+                pack();
+                setVisible(true);
+                break;
+
+            case 5:
+                pan.removeAll();
+                model.j.setNbJoueur(6);
+                model.j.initJoueur();
+                model.s.initScore(model.j.getJoueur());
+                model.d.initLancer();
+                System.out.println(model.j.nbJoueur);
+                creerWidget2();
+                pack();
+                setVisible(true);
                 break;
 
             default:
@@ -436,7 +487,7 @@ public class Fenetre extends JFrame {
     public void setControlButton(ActionListener listener) {
         // xxx.addActionListener(listener);
 
-       // lancer.addActionListener(control);
+        // lancer.addActionListener(control);
 
     }
 }

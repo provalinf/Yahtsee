@@ -18,24 +18,35 @@ public class ControlMenu implements ActionListener {
 
         if (e.getSource() == fen.itemInterface1) {
             fen.changerVersion(1);
-            System.out.println("Test Version 1 ok");
+            System.out.println(" joueur2 ok");
+            fen.repaint();
 
-        } else {
-            if (e.getSource() == fen.itemInterface2) {
-                fen.changerVersion(2);
-                System.out.println("Test version 2 ok");
+        } else if (e.getSource() == fen.itemInterface2) {
+            fen.changerVersion(2);
+            System.out.println(" joueur3 ok");
+            fen.repaint();
 
-            } else {
-                if (e.getSource() == fen.itemApropos) {
-                    fen.creerDialogue("fait par nico");
-                    System.out.println("aproposselectioné");
 
-                } else {
-                    System.out.println(" what?");
-                }
-            }
+        } else if (e.getSource() == fen.itemInterface3) {
+            fen.changerVersion(3);
+            System.out.println(" joueur4 ok");
+            fen.repaint();
+
+
+        } else if (e.getSource() == fen.itemInterface4) {
+            fen.changerVersion(4);
+            System.out.println(" joueur5 ok");
+            fen.repaint();
+
+
+        } else if (e.getSource() == fen.itemInterface5) {
+            fen.changerVersion(5);
+            System.out.println(" joueur6 ok");
+            fen.repaint();
         }
-
-
     }
 }
+
+
+
+
