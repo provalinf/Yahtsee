@@ -18,6 +18,15 @@ public class Model {
     protected Score s;
     protected int v, w, x, y, z, type;
     protected int tri[];
+
+    protected ImageIcon face[]={new ImageIcon("/images/0.png"),//premier image vide pour que la liste icone sois correct
+            new ImageIcon("/images/1.png"),new ImageIcon("/images/2.png")
+            ,new ImageIcon("/images/3.png"),new ImageIcon("/images/4.png")
+            ,new ImageIcon("/images/5.png"),new ImageIcon("/images/6.png")};//non utilisé a integré dans version 2
+
+    protected ArrayList<Image> de0, de1, de2, de3, de4, de5, de6;
+    Toolkit tk = Toolkit.getDefaultToolkit();
+
     String cho="";
     int TabRemp;
     int caseActu;
@@ -29,8 +38,10 @@ public class Model {
         tri = new int[5];
         TabRemp=19*j.getNbJoueur();
         caseActu=0;
+        for (int i = 0; i <j.getJoueur() ; i++) {//initialisation de case en bool pour la prime de 35
+            s.initPrimeTrenteCinq(i);
+        }
     }
-
 
     //petit reset de case dans la partir de lancer
     public void initCase(Fenetre fen) {
@@ -47,59 +58,63 @@ public class Model {
     }
 
     public void brelan(int t[], int joueur) {
-        for (int i = 0; i < 3; i++) {
-            if (t[i] == t[i + 1] && t[i + 1] == t[i + 2]) {
-                s.setScore(j.getJoueur(), 10);
-            } else {
-                s.setScore(j.getJoueur(), 0);
-            }
-        }
-    }
-
-    public void full(int t[], int joueur) {
-        for (int i = 0; i < 3; i++) {
-            if (t[i] == t[i + 1] && t[i + 1] == t[i + 2]) {
-                s.setScore(j.getJoueur(), 30);
-            } else {
-                s.setScore(j.getJoueur(), 0);
-            }
-        }
-    }
-
-    public void carre(int t[], int joueur) {
-        for (int i = 0; i < 2; i++) {
-            if (t[i] == t[i + 1] && t[i + 1] == t[i + 2] && t[i + 2] == t[i + 3]) {
-                s.setScore(j.getJoueur(), 40);
-            } else {
-                s.setScore(j.getJoueur(), 0);
-            }
-        }
-    }
-
-    public void Psuite(int t[], int joueur) {
-        for (int i = 0; i < 1; i++) {
-            if (t[i] == t[i + 1] + 1 && t[i + 1] == t[i + 2] + 1 && t[i + 2] == t[i + 3] + 1 && t[i + 3] == t[i + 4] + 1) {
-                s.setScore(j.getJoueur(), 30);
-            } else {
-                s.setScore(j.getJoueur(), 0);
-            }
-        }
-    }
-
-    public void Gsuite(int t[], int joueur) {
-        int i = 0;
-        if (t[i] == t[i + 1] + 1 && t[i + 1] == t[i + 2] + 1 && t[i + 2] == t[i + 3] + 1 && t[i + 3] == t[i + 4] + 1 && t[i + 3] == t[i + 4] + 1) {
-            s.setScore(j.getJoueur(), 40);
+        if ((t[0] == t[1] && t[1] == t[2]) || (t[1] == t[2] && t[2] == t[3]) || (t[2] == t[3] && t[3] == t[4])) {
+            s.setScore(j.getJoueur(),(t[0]+t[1]+t[2]+t[3]+t[4]));
         } else {
             s.setScore(j.getJoueur(), 0);
         }
     }
 
-    public void Chance(int t[], int joueur) {
-        for (int i = 0; i < t.length; i++) {
-            s.setScore(j.getJoueur(), s.getScore(j.getJoueur()) + tri[i]);
+    public void carre(int t[], int joueur) {
+
+        if ((t[0] == t[1] && t[1] == t[2] && t[2] == t[3]) || (t[1] == t[2] && t[2] == t[3] && t[3] == t[4])) {
+            s.setScore(j.getJoueur(), (t[0]+t[1]+t[2]+t[3]+t[4]));
+        } else {
+            s.setScore(j.getJoueur(), 0);
+        }
+
+    }
+
+
+    public void full(int t[], int joueur) {
+        for (int i = 0; i < 3; i++) {
+            if (t[i] == t[i + 1] && t[i + 1] == t[i + 2]) {
+                s.setScore(j.getJoueur(), 25);
+            } else {
+                s.setScore(j.getJoueur(), 0);
+            }
         }
     }
+
+    public void Psuite(int t[], int joueur) {//version propre
+    // gestion des doublons
+        for (int i = 0; i <t.length-1 ; i++) {
+            if(t[i]==t[i+1]){t[i+1]=8;}
+        }
+        Arrays.sort(t);
+        //verif de suite
+        for (int i = 0; i < 2; i++) {
+            if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 ) {
+                s.setScore(j.getJoueur(), 30);
+            } else {
+                s.setScore(j.getJoueur(), 0);
+            }
+        }
+
+
+    }
+
+    public void Gsuite(int t[], int joueur) {//version propre
+        for (int i = 0; i < 1; i++) {
+            if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 && t[i+3]==t[i+4]-1 ) {
+                s.setScore(j.getJoueur(), 40);
+            } else {
+                s.setScore(j.getJoueur(), 0);
+            }
+        }
+
+    }
+
 
     public void Yahtzee(int t[], int joueur) {
         int i = 0;
@@ -109,6 +124,15 @@ public class Model {
             s.setScore(j.getJoueur(), 0);
         }
 
+    }
+
+    public void Chance(int t[], int joueur) {
+        int somme=0;
+
+        for (int i = 0; i < t.length; i++) {
+            somme= somme+t[i];
+        }
+        s.setScore(j.getJoueur(), somme);
     }
 
     //verif etajout score de la partie sup
@@ -178,19 +202,20 @@ public class Model {
 
     }
 
-    //focntion pour verifié si toutes les case sont remplis donc que la partie est terminé.
+    //fonction pour verifié si toutes les case sont remplis donc que la partie est terminé.
     public void verifcase(Fenetre fen) {
 
         for (int i = 0; i < 22; i++) {
             for (int k = 0; k < 22; k++) {
 
                 String comp= fen.esp[i][k].getText();
-                if (comp != "_") {
+                if (comp != "_"&& comp!=" ") {
                     caseActu=caseActu+1;
-
+					System.out.println(caseActu);
                 }
                 if(caseActu==TabRemp){
                     System.out.println("PARTIE TERMINE");
+					fen.creerDialogue("partie finis");
                 }
             }
         }
@@ -200,27 +225,50 @@ public class Model {
 
         switch (joueur) {
             case 0:
-                return cho="michel";
+                return cho=" Tour de joueur qui n'existe pas";
 
             case 1:
-                return cho="micheline";
+                return cho="Tour du Joueur 1";
 
             case 2:
-                return cho="valentin";
+                return cho="Tour du Joueur 2";
 
             case 3:
-                return cho="thomas";
+                return cho="Tour du Joueur 3";
 
             case 4:
-                return cho="ismael";
+                return cho="Tour du joueur 4";
 
             case 5:
-                return cho="roi des truites";
+                return cho="Tour du Joueur 5";
+
+            case 6:
+                return cho="Tour du Joueur 6";
 
             default:System.out.println(" hors piste");
         }
         return cho;
     }
+
+    public void initcheckFalse(Fenetre Fen){{
+    Fen.A1.setEnabled(false);}
+    Fen.A2.setEnabled(false);
+    Fen.A3.setEnabled(false);
+    Fen.A4.setEnabled(false);
+    Fen.A5.setEnabled(false);
+    }
+
+
+    public void initcheckTrue(Fenetre Fen){{
+        Fen.A1.setEnabled(true);}
+        Fen.A2.setEnabled(true);
+        Fen.A3.setEnabled(true);
+        Fen.A4.setEnabled(true);
+        Fen.A5.setEnabled(true);
+    }
+
+
+
 }
 
 

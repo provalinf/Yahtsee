@@ -26,10 +26,11 @@ public class ControlButton implements ActionListener{
         totalup = new int[model.j.getNbJoueur()];
         int sortie[] = new int[6];
         JLabel dé1, dé2, dé3, dé4, dé5;
-        System.out.println(" joueur :"+model.j.getJoueur()+" Score :"+model.s.getScore(model.j.getJoueur()));
+		System.out.print(model.caseActu);
 
         if (e.getSource() == fen.lancer) {
             model.d.jette();
+            model.initcheckTrue(fen);
 
             if (fen.A1.isSelected() == false) {
                 dé1 = fen.dé1;
@@ -67,8 +68,6 @@ public class ControlButton implements ActionListener{
                 model.d.initLancer();
             }
 
-            System.out.println("lancer  : " + model.d.getLancer());
-
         }
 
         if (e.getSource() == fen.TotalAs) {
@@ -82,20 +81,34 @@ public class ControlButton implements ActionListener{
                 model.d.initLancer();//initialise le lancer
                 model.s.initScore(model.j.getJoueur());//initialisation de la somme
                 model.compAdd(fen, 1);//utilise la focntion pour recupere les dés et sortire le totale du lancer
+
+                if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){//mise ne place de la verife si la prime de 35 point est valide
+                    model.s.setTotalScoreHaut(model.j.getJoueur(),35);                                                      ///a repeter pour chaque touche
+                    model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                    fen.esp[8][model.j.getJoueur()].setText("35");
+                }
+
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));////on transforme en string
                 fen.esp[1][model.j.getJoueur()].setText(esp1);//on insert le text dans la fenetre
                 model.initCase(fen);//on remet les des et les check a zero
                 model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));//on update le score pour la partie haute
                 String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));//transformation en string
-
+                model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
                 fen.esp[7][model.j.getJoueur()].setText(trans);//insertion dans fentre
                 fen.esp[9][model.j.getJoueur()].setText(trans);//la aussi
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));
-            } else {fen.Info3.setText("Impossible case deja joué");}
+                fen.esp[22][model.j.getJoueur()].setText(transToo);
+              //  model.verifcase(fen);
+
+                model.initcheckFalse(fen);
 
                 if (model.j.getJoueur() != model.j.getNbJoueur()) {
                     model.j.setJoueur();
                 }
+                fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+            } else {fen.Info3.setText("Impossible case deja joué");}//ET LA LE CAS OU SI LA CASE EST DEJA REMPLI
+
+
 
             }
 
@@ -110,21 +123,33 @@ public class ControlButton implements ActionListener{
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd(fen, 2);
+                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
+                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                        fen.esp[8][model.j.getJoueur()].setText("35");
+                    }
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
                 fen.esp[2][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
                 model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
                 fen.esp[7][model.j.getJoueur()].setText(trans);
                 fen.esp[9][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                  //  model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
-
-                    model.j.setJoueur();
-                }
 
             }
 
@@ -139,20 +164,33 @@ public class ControlButton implements ActionListener{
                     model.d.initLancer();
                     model.s.initScore(model.j.getJoueur());
                     model.compAdd(fen, 3);
+                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
+                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                        fen.esp[8][model.j.getJoueur()].setText("35");
+                    }
                     String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
                     fen.esp[3][model.j.getJoueur()].setText(esp1);
                     model.initCase(fen);
                     model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                     String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
+
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
                     fen.esp[7][model.j.getJoueur()].setText(trans);
                     fen.esp[9][model.j.getJoueur()].setText(trans);
-                    fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                  //  model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
                 } else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
 
-                    model.j.setJoueur();
-                }
             }
 
             if (e.getSource() == fen.TotalQuatre) {
@@ -165,21 +203,34 @@ public class ControlButton implements ActionListener{
                     model.d.initLancer();
                     model.s.initScore(model.j.getJoueur());
                     model.compAdd(fen, 4);
+                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
+                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                        fen.esp[8][model.j.getJoueur()].setText("35");
+                    }
                     String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
                     fen.esp[4][model.j.getJoueur()].setText(esp1);
                     model.initCase(fen);
                     model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                     String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
                     fen.esp[7][model.j.getJoueur()].setText(trans);
                     fen.esp[9][model.j.getJoueur()].setText(trans);
-                    fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                   // model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.nbJoueur) {
+
+                        model.j.setJoueur();
+                        fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.nbJoueur) {
 
-                    model.j.setJoueur();
                 }
-                System.out.println("lancer  : " + model.d.getLancer());
+
             }
 
             if (e.getSource() == fen.TotalCinq) {
@@ -192,20 +243,32 @@ public class ControlButton implements ActionListener{
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd(fen, 5);
+                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
+                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                        fen.esp[8][model.j.getJoueur()].setText("35");
+                    }
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
                 fen.esp[5][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
                 model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
                 fen.esp[7][model.j.getJoueur()].setText(trans);
                 fen.esp[9][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                   // model.verifcase(fen);
+                    model.initcheckFalse(fen);
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
 
-                    model.j.setJoueur();
-                }
             }
 
             if (e.getSource() == fen.TotalSix) {
@@ -218,20 +281,35 @@ public class ControlButton implements ActionListener{
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                     model.compAdd(fen, 6);
+                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
+                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                        fen.esp[8][model.j.getJoueur()].setText("35");
+                    }
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
                 fen.esp[6][model.j.getJoueur()].setText(esp1);
-                model.initCase(fen);
-                model.s.setTotalScoreHaut(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
-                fen.esp[7][model.j.getJoueur()].setText(trans);
-                fen.esp[9][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
-                else {fen.Info3.setText("Impossible case deja joué");}
+                    model.initCase(fen);
+                    model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
+                    String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    fen.esp[7][model.j.getJoueur()].setText(trans);
+                    fen.esp[9][model.j.getJoueur()].setText(trans);
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                    model.initcheckFalse(fen);
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
 
-                    model.j.setJoueur();
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
                 }
+                else {fen.Info3.setText("Impossible case deja joué");
+
+                   // model.verifcase(fen);
+                }
+
+
 
             }
         ////partie basse be quiet
@@ -241,178 +319,240 @@ public class ControlButton implements ActionListener{
                 if (model.j.getJoueur() == model.j.getNbJoueur()) {
                     model.j.initJoueur();
                 }
-                if (fen.esp[12][model.j.getJoueur()].getText() == "_") {
+                if (fen.esp[13][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 1, model.j.getJoueur());
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                fen.esp[12][model.j.getJoueur()].setText(esp1);
+                fen.esp[13][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()), model.s.getScore(model.j.getJoueur()));
+                    model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
-                fen.esp[21][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
 
+                fen.esp[21][model.j.getJoueur()].setText(trans);
+                fen.esp[22][model.j.getJoueur()].setText(transToo);
+                    model.initcheckFalse(fen);
+
+                   // model.verifcase(fen);
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
                 }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
 
-                    model.j.setJoueur();
-                }
             }
 
             if (e.getSource() == fen.Carre) {
                 if (model.j.getJoueur() == model.j.getNbJoueur()) {
                     model.j.initJoueur();
                 }
-                if (fen.esp[13][model.j.getJoueur()].getText() == "_") {
+                if (fen.esp[14][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 2, model.j.getJoueur());
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                fen.esp[13][model.j.getJoueur()].setText(esp1);
+                fen.esp[14][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
+                    model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+
                 fen.esp[21][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                    //model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.nbJoueur) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.nbJoueur) {
-
-                    model.j.setJoueur();
-                }
             }
 
             if (e.getSource() == fen.Full) {
                 if (model.j.getJoueur() == model.j.nbJoueur) {
                     model.j.initJoueur();
                 }
-                if (fen.esp[14][model.j.getJoueur()].getText() == "_") {
+                if (fen.esp[15][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 3, model.j.getJoueur());
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                fen.esp[14][model.j.getJoueur()].setText(esp1);
+                fen.esp[15][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
+                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+
                 fen.esp[21][model.j.getJoueur()].setText(trans);
-                    fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                   // model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
 
-                    model.j.setJoueur();
-                }
             }
 
             if (e.getSource() == fen.PSuite) {
                 if (model.j.getJoueur() == model.j.getNbJoueur()) {
                     model.j.initJoueur();
                 }
-                if (fen.esp[15][model.j.getJoueur()].getText() == "_") {
+                if (fen.esp[16][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 4, model.j.getJoueur());
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                fen.esp[15][model.j.getJoueur()].setText(esp1);
+                fen.esp[16][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
+                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+
                 fen.esp[21][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                   // model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
 
-                    model.j.setJoueur();
-                }
             }
 
             if (e.getSource() == fen.GSuite) {
                 if (model.j.getJoueur() == model.j.nbJoueur) {
                     model.j.initJoueur();
                 }
-                if (fen.esp[16][model.j.getJoueur()].getText() == "_") {
+                if (fen.esp[17][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 5, model.j.getJoueur());
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                fen.esp[16][model.j.getJoueur()].setText(esp1);
+                fen.esp[17][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
+                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+
                 fen.esp[21][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                   // model.verifcase(fen);
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.nbJoueur) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                    }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.nbJoueur) {
 
-                    model.j.setJoueur();
-                }
             }
+
+
             if (e.getSource() == fen.Yahtzee) {
                 if (model.j.getJoueur() == model.j.getNbJoueur()) {
-                    model.j.initJoueur();
-                }
-                if (fen.esp[17][model.j.getJoueur()].getText() == "_") {
-                    fen.lancer.setVisible(true);
-                model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
-                model.compAdd2(fen, 6, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                    if(esp1!="0"){
-                        fen.esp[19][model.j.getJoueur()].setText(esp1);
-                    }
-                fen.esp[17][model.j.getJoueur()].setText(esp1);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
-                fen.esp[21][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
-                else {fen.Info3.setText("Impossible case deja joué");}
-
-                if (model.j.getJoueur() != model.j.nbJoueur) {
-
-                    model.j.setJoueur();
-                }
-            }
-
-            if (e.getSource() == fen.Chance) {
-                if (model.j.getJoueur() == model.j.nbJoueur) {
                     model.j.initJoueur();
                 }
                 if (fen.esp[18][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
-                model.compAdd2(fen, 7, model.j.getJoueur());
+                model.compAdd2(fen, 6, model.j.getJoueur());
                 String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
-                fen.esp[18][model.j.getJoueur()].setText(esp1);
+                    if(esp1!="0"){
+                        fen.esp[18][model.j.getJoueur()].setText(esp1);
+                    }
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.s.getScore(model.j.getJoueur()),model.s.getScore(model.j.getJoueur()));
+                fen.esp[18][model.j.getJoueur()].setText(esp1);
+
+                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
                 String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                fen.esp[20][model.j.getJoueur()].setText(trans);
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+
                 fen.esp[21][model.j.getJoueur()].setText(trans);
-                fen.Info3.setText("Tour du Joueur "+model.nomjoueur(model.j.getJoueur()));}
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+
+                    model.initcheckFalse(fen);
+                 //   model.verifcase(fen);
+                    if (model.j.getJoueur() != model.j.nbJoueur) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                    }
                 else {fen.Info3.setText("Impossible case deja joué");}
 
-                if (model.j.getJoueur() != model.j.getNbJoueur()) {
+            }
 
-                    model.j.setJoueur();
+            if (e.getSource() == fen.Chance) {
+                if (model.j.getJoueur() == model.j.nbJoueur) {
+                    model.j.initJoueur();
                 }
+                if (fen.esp[19][model.j.getJoueur()].getText() == "_") {
+                    fen.lancer.setVisible(true);
+                model.d.initLancer();
+                model.s.initScore(model.j.getJoueur());
+                model.compAdd2(fen, 7, model.j.getJoueur());
+                    model.initCase(fen);
+
+                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                    System.out.println(model.s.getScore(model.j.getJoueur()));
+                fen.esp[19][model.j.getJoueur()].setText(esp1);
+                //model.initCase(fen);
+
+                    model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
+
+                    String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
+
+                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+
+                    fen.esp[21][model.j.getJoueur()].setText(trans);
+                    fen.esp[22][model.j.getJoueur()].setText(transToo);
+                  //  model.verifcase(fen);*/
+                    model.initcheckFalse(fen);
+
+                    if (model.j.getJoueur() != model.j.getNbJoueur()) {
+
+                        model.j.setJoueur();
+                    }
+                    fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
+                    }
+                else {fen.Info3.setText("Impossible case deja joué");}
+
+
             }
 
 

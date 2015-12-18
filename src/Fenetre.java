@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 /**
  * Created by nico on 08/11/15.
@@ -14,9 +14,9 @@ public class Fenetre extends JFrame {
     protected int i;
     //section sup
     //int nbJoueur =3;
-    protected JLabel esp[][] = new JLabel[22][22];
-    protected JPanel espA[][] = new JPanel[22][22];
-    protected JPanel espB[][] = new JPanel[22][22];
+    protected JLabel esp[][] = new JLabel[23][23];
+    protected JPanel espA[][] = new JPanel[23][23];
+    protected JPanel espB[][] = new JPanel[23][23];
     //section bas
 
     protected JButton TotalAs,TotalDeux,TotalTrois,TotalQuatre,TotalCinq, TotalSix,Brelan,Carre, Full, PSuite, GSuite, Yahtzee, Chance;
@@ -33,6 +33,8 @@ public class Fenetre extends JFrame {
     protected ControlButton control;
     protected ControlButton controlA;
     protected ControlMenu control2 = new ControlMenu(this);
+    protected ImageIcon listeImages[] = new ImageIcon[7];
+
 
 
     public Fenetre(Model model) {
@@ -41,9 +43,11 @@ public class Fenetre extends JFrame {
         initAttribut();
         creerMenu();
         creerWidget2();
+        setIconImage(new ImageIcon("images/logo.png").getImage());
         this.setResizable(true);
         pack();
-        setTitle("Yahtsee");
+        setTitle("YAHTZEE");
+        //setSize(700,700);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -105,20 +109,16 @@ public class Fenetre extends JFrame {
         vide= new JLabel(" ");
         Info3 = new JLabel("tour du joueur 1");
 
-        String[] Option = new String[]{"Latin", "Grec", "Sport"};
-        E1 = new JComboBox<String>(Option);
-
-        F1 = new JCheckBox("", true);
 
         // G1= new JButton("Moyenne");
 
         menuBar = new JMenuBar();
         option = new JMenu("Option");
         setItemInterface1(new JMenuItem("2 joueurs"));
-        itemInterface2 = new JMenuItem("3 joueur");
-        itemInterface3 = new JMenuItem("4 joueur");
-        itemInterface4 = new JMenuItem("5 joueur");
-        itemInterface5 = new JMenuItem("6 joueur");
+        itemInterface2 = new JMenuItem("3 joueurs");
+        itemInterface3 = new JMenuItem("4 joueurs");
+        itemInterface4 = new JMenuItem("5 joueurs");
+        itemInterface5 = new JMenuItem("6 joueurs");
         itemAide = new JMenu("Aide");
         itemComment = new JMenuItem("Comment ça marche?");
         itemApropos = new JMenuItem("A propos");
@@ -140,32 +140,9 @@ public class Fenetre extends JFrame {
         JLabel sectionUp = new JLabel("SECTION SUPERIEUR");
         PanoB1.add(sectionUp);
 
-        JPanel PanoB2 = new JPanel();
-        PanoB2.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoB2.add(TotalAs);
-
-        JPanel PanoB3 = new JPanel();
-        PanoB3.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoB3.add(TotalDeux);
-
-        JPanel PanoB4 = new JPanel();
-        PanoB4.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoB4.add(TotalTrois);
-
-        JPanel PanoB5 = new JPanel();
-        PanoB5.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoB5.add(TotalQuatre);
-
-        JPanel PanoB6 = new JPanel();
-        PanoB6.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoB6.add(TotalCinq);
-
-        JPanel PanoB7 = new JPanel();
-        PanoB7.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoB7.add(TotalSix);
-
         JPanel PanoB8 = new JPanel();
         PanoB8.setBorder(BorderFactory.createLineBorder(Color.black));
+        Total = new JLabel("Total");
         PanoB8.add(Total);
 
         JPanel PanoB9 = new JPanel();
@@ -189,34 +166,6 @@ public class Fenetre extends JFrame {
         JLabel sectionInf = new JLabel("SECTION INFERIEUR");
         PanoA1.add(sectionInf);
 
-        JPanel PanoA2 = new JPanel();
-        PanoA2.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA2.add(Brelan);
-
-        JPanel PanoA3 = new JPanel();
-        PanoA3.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA3.add(Carre);
-
-        JPanel PanoA4 = new JPanel();
-        PanoA4.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA4.add(Full);
-
-        JPanel PanoA5 = new JPanel();
-        PanoA5.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA5.add(PSuite);
-
-        JPanel PanoA6 = new JPanel();
-        PanoA6.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA6.add(GSuite);
-
-        JPanel PanoA7 = new JPanel();
-        PanoA7.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA7.add(Yahtzee);
-
-        JPanel PanoA8 = new JPanel();
-        PanoA8.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoA8.add(Chance);
-
         JPanel PanoA9 = new JPanel();
         PanoA9.setBorder(BorderFactory.createLineBorder(Color.black));
         PrimeY = new JLabel("Prime Yahtzee 100 points");
@@ -233,10 +182,12 @@ public class Fenetre extends JFrame {
         PanoA11.add(TotalSup2);
 
 
+
         //création de la partie des Dés
         //partie des checkbox et des label d'affichage
 
         A1= new JCheckBox("Garder");
+        A1.setEnabled(false);
 
         JPanel PartieD1 = new JPanel();
         PartieD1.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -244,8 +195,9 @@ public class Fenetre extends JFrame {
         PartieD1.add(Box.createGlue());
         PartieD1.add(dé1);
 
-        A2= new JCheckBox("Garder");
 
+        A2= new JCheckBox("Garder");
+        A2.setEnabled(false);
         JPanel PartieD2 = new JPanel();
         PartieD2.setBorder(BorderFactory.createLineBorder(Color.black));
         PartieD2.add(A2);
@@ -253,7 +205,7 @@ public class Fenetre extends JFrame {
         PartieD2.add(dé2);
 
         A3= new JCheckBox("Garder");
-
+        A3.setEnabled(false);
         JPanel PartieD3 = new JPanel();
         PartieD3.setBorder(BorderFactory.createLineBorder(Color.black));
         PartieD3.add(A3);
@@ -261,7 +213,7 @@ public class Fenetre extends JFrame {
         PartieD3.add(dé3);
 
         A4= new JCheckBox("Garder");
-
+        A4.setEnabled(false);
         JPanel PartieD4 = new JPanel();
         PartieD4.setBorder(BorderFactory.createLineBorder(Color.black));
         PartieD4.add(A4);
@@ -269,7 +221,7 @@ public class Fenetre extends JFrame {
         PartieD4.add(dé4);
 
         A5= new JCheckBox("Garder");
-
+        A5.setEnabled(false);
         JPanel PartieD5 = new JPanel();
         PartieD5.setBorder(BorderFactory.createLineBorder(Color.black));
         PartieD5.add(A5);
@@ -282,48 +234,71 @@ public class Fenetre extends JFrame {
 
         //panneau d'info du joueur
         JPanel PanoInfo = new JPanel();
+        PanoInfo.setBackground(Color.gray);
         JPanel PanoInfo2 = new JPanel();
 
         PanoInfo2.setBorder(BorderFactory.createLineBorder(Color.black));
         PanoInfo2.add(Info3);
         PanoInfo.add(PanoInfo2);
 
-
-        JPanel PanoC1 = new JPanel();
-        //PanoC1.add(PanoCC1);
-
-
         //grille des joueurs
-        JPanel player= new JPanel(new GridLayout(22, model.j.getNbJoueur()));
+        JPanel player = new JPanel(new GridLayout(22, model.j.getNbJoueur()));
         for (int j = 0; j <esp.length; j++) {
-            for (int k = 0; k <model.j.getNbJoueur(); k++) {
+            for (int k = 0; k < model.j.getNbJoueur(); k++) {
 
-                esp[j][k]= new JLabel();
+                esp[j][k] = new JLabel();
                 // esp[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
-                if(esp[j][k]==esp[0][k]){
-                    int num=k+1;
-                    esp[j][k].setText("joueur "+num );
+                if (esp[j][k] == esp[0][k]) {
+                    int num = k + 1;
+
+                    esp[j][k].setText("joueur " + num);
+                    esp[j][k].setOpaque(false);
+                    esp[j][k].setBackground(Color.red);
+
+                } else if (esp[j][k] == esp[11][k]) {
+                    esp[j][k].setText(" ");
+                    esp[j][k].setOpaque(false);
+
+                }else if (esp[j][k] == esp[12][k]) {
+                    esp[j][k].setText(" ");
+                    System.out.println("esp 11");
+                    esp[j][k].setOpaque(false);
+
+                } else {
+                    esp[j][k].setText("_");
                     esp[j][k].setOpaque(false);
                 }
-                else{
-                    esp[j][k].setText("_");}
 
-                espA[j][k]= new JPanel();
-                //espA[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
-                espA[j][k].add(esp[j][k]);
-                espB[j][k]= new JPanel();
-                espB[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
-                espB[j][k].add(espA[j][k]);
-                player.add(espB[j][k]);
+                espA[j][k] = new JPanel();
+
+                if (espA[j][k] == espA[10][k]) {
+                    espA[j][k].setOpaque(false);
+                    espA[j][k].setBackground(Color.white);
+                } else {
+
+                    espA[j][k].add(esp[j][k]);
+                    espA[j][k].setBackground(Color.white);
+                }
+
+                espB[j][k] = new JPanel();
+                if (espB[j][k] == espB[10][k]) {
+                    espB[j][k].setOpaque(false);
+                    espB[j][k].setBackground(Color.white);
+                } else {
+
+                    espB[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
+                    espB[j][k].add(esp[j][k]);
+                    Color color= new Color(225, 0, 225);
+                    espB[j][k].setBackground(Color.white);
+                    player.add(espB[j][k]);
+                }
             }
 
         }
 
-        //   player.add(joueur);
-
-
         //grille2
         JPanel partie= new JPanel(new GridLayout(7,1));
+        partie.setBackground(Color.green);
 
         partie.add(PartieD1);
         partie.add(PartieD2);
@@ -332,48 +307,55 @@ public class Fenetre extends JFrame {
         partie.add(PartieD5);
         partie.add(PartieD6);
         partie.add(PanoInfo);
+        System.out.println(model.j.getJoueur());
 
-        //affichage partie h affichage de gauche
-        JPanel PanoSecSup = new JPanel(new GridLayout(22, 1));
-        PanoSecSup.setBorder(BorderFactory.createLineBorder(Color.black));
-        PanoSecSup.add(PanoB1);
-        PanoSecSup.add(PanoB2);
-        PanoSecSup.add(PanoB3);
-        PanoSecSup.add(PanoB4);
-        PanoSecSup.add(PanoB5);
-        PanoSecSup.add(PanoB6);
-        PanoSecSup.add(PanoB7);
-        PanoSecSup.add(PanoB8);
-        PanoSecSup.add(PanoB9);
-        PanoSecSup.add(PanoB10);
-        PanoSecSup.add(PanoB11);
-        PanoSecSup.add(PanoA1);
-        PanoSecSup.add(PanoA2);
-        PanoSecSup.add(PanoA3);
-        PanoSecSup.add(PanoA4);
-        PanoSecSup.add(PanoA5);
-        PanoSecSup.add(PanoA6);
-        PanoSecSup.add(PanoA7);
-        PanoSecSup.add(PanoA8);
-        PanoSecSup.add(PanoA9);
-        PanoSecSup.add(PanoA10);
-        PanoSecSup.add(PanoA11);
+        JPanel partie2= new JPanel(new GridLayout(5,1));
+        partie2.setBackground(Color.green);
 
+        JPanel PanoSup = new JPanel(new GridLayout(22, 1));
+        PanoSup.add(PanoB1);
+        PanoSup.add(TotalAs);
+        PanoSup.add(TotalDeux);
+        PanoSup.add(TotalTrois);
+        PanoSup.add(TotalQuatre);
+        PanoSup.add(TotalCinq);
+        PanoSup.add(TotalSix);
+        PanoSup.add(PanoB8);
+        PanoSup.add(PanoB9);
+        PanoSup.add(PanoB10);
+        PanoSup.add(PanoB11);
+        PanoSup.add(PanoA1);
+        PanoSup.add(Brelan);
+        PanoSup.add(Carre);
+        PanoSup.add(Full);
+        PanoSup.add(PSuite);
+        PanoSup.add(GSuite);
+        PanoSup.add(Yahtzee);
+        PanoSup.add(Chance);
+        PanoSup.add(PanoA9);
+        PanoSup.add(PanoA10);
+        PanoSup.add(PanoA11);
 
         JPanel Capsule1 = new JPanel();
-        Capsule1.add(PanoSecSup);
-        JPanel Capsule2 = new JPanel();
-        Capsule2.add(partie);
+        //Capsule1.add(PanoSecSup);
+        Capsule1.add(PanoSup);
+        Capsule1.setBackground(Color.green);
+
         JPanel Capsule3 = new JPanel();
         Capsule3.add(player);
-       /* JPanel Capsule4 = new JPanel();
-        Capsule4.add(player2);*/
+        Capsule3.setBackground(Color.green);
 
-        JPanel affichage = new JPanel(new GridLayout(1,3));
+        JPanel Capsule2 = new JPanel();
+        Capsule2.add(partie);
+        Capsule2.add(partie2);
+        Capsule2.setBackground(Color.green);
+
+
+        JPanel affichage = new JPanel(new GridLayout(1,4));
         affichage.add(Capsule1);
         affichage.add(Capsule3);
         affichage.add(Capsule2);
-       /* affichage.add(Capsule4);*/
+        //affichage.add(pano);
         JPanel affichage2 = new JPanel();
         affichage2.add(affichage);
 
@@ -407,6 +389,7 @@ public class Fenetre extends JFrame {
             case 1:
                 model.j.setNbJoueur(2);
                 pan.removeAll();
+                initcheckText();
                 model.j.initJoueur();
                 model.s.initScore(model.j.getJoueur());
                 model.d.initLancer();
@@ -420,10 +403,10 @@ public class Fenetre extends JFrame {
             case 2:
                 model.j.setNbJoueur(3);
                 pan.removeAll();
+                initcheckText();
                 model.j.initJoueur();
                 model.s.initScore(model.j.getJoueur());
                 model.d.initLancer();
-                System.out.println(model.j.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -433,10 +416,10 @@ public class Fenetre extends JFrame {
             case 3:
                 model.j.setNbJoueur(4);
                 pan.removeAll();
+                initcheckText();
                 model.j.initJoueur();
                 model.s.initScore(model.j.getJoueur());
                 model.d.initLancer();
-                System.out.println(model.j.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -445,10 +428,10 @@ public class Fenetre extends JFrame {
             case 4:
                 pan.removeAll();
                 model.j.setNbJoueur(5);
+                initcheckText();
                 model.j.initJoueur();
                 model.d.initLancer();
                 model.s.initScore(model.j.getJoueur());
-                System.out.println(model.j.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -457,10 +440,10 @@ public class Fenetre extends JFrame {
             case 5:
                 pan.removeAll();
                 model.j.setNbJoueur(6);
+                initcheckText();
                 model.j.initJoueur();
                 model.s.initScore(model.j.getJoueur());
                 model.d.initLancer();
-                System.out.println(model.j.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -484,11 +467,13 @@ public class Fenetre extends JFrame {
         this.itemInterface1 = itemInterface1;
     }
 
-    public void setControlButton(ActionListener listener) {
-        // xxx.addActionListener(listener);
-
-        // lancer.addActionListener(control);
+    public void initcheckText(){
+        dé1.setText("_");
+        dé2.setText("_");
+        dé3.setText("_");
+        dé4.setText("_");
+        dé5.setText("_");
 
     }
-}
 
+}
