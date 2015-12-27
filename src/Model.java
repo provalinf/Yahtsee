@@ -29,7 +29,7 @@ public class Model {
 
     String cho="";
     int TabRemp;
-    int caseActu;
+    int tour;
 
     public Model() {
         j = new Joueur();
@@ -37,7 +37,7 @@ public class Model {
         s = new Score();
         tri = new int[5];
         TabRemp=19*j.getNbJoueur();
-        caseActu=0;
+        tour=0;
         for (int i = 0; i <j.getJoueur() ; i++) {//initialisation de case en bool pour la prime de 35
             s.initPrimeTrenteCinq(i);
         }
@@ -57,36 +57,43 @@ public class Model {
         fen.A5.setSelected(false);
     }
 
-    public void brelan(int t[], int joueur) {
-        if ((t[0] == t[1] && t[1] == t[2]) || (t[1] == t[2] && t[2] == t[3]) || (t[2] == t[3] && t[3] == t[4])) {
-            s.setScore(j.getJoueur(),(t[0]+t[1]+t[2]+t[3]+t[4]));
-        } else {
-            s.setScore(j.getJoueur(), 0);
+    public void brelan(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
+        for (int i = 0; i <=2 ; i++) {
+
+            if (t[i] == t[1+1] && t[i+1] == t[i+2]) {
+                s.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2])*3);
+            } else {
+                s.setScore(j.getJoueur(), 0);
+            }
         }
+
     }
 
-    public void carre(int t[], int joueur) {
+    public void carre(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
 
-        if ((t[0] == t[1] && t[1] == t[2] && t[2] == t[3]) || (t[1] == t[2] && t[2] == t[3] && t[3] == t[4])) {
-            s.setScore(j.getJoueur(), (t[0]+t[1]+t[2]+t[3]+t[4]));
-        } else {
-            s.setScore(j.getJoueur(), 0);
+        for (int i = 0; i <=1 ; i++) {
+
+            if (t[i] == t[1+1] && t[i+1] == t[i+2]&& t[i+2] == t[i+3]) {
+                s.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2]+t[i+3])*4);
+            } else {
+                s.setScore(j.getJoueur(), 0);
+            }
         }
 
     }
 
 
     public void full(int t[], int joueur) {
-        for (int i = 0; i < 3; i++) {
-            if (t[i] == t[i + 1] && t[i + 1] == t[i + 2]) {
+            if (t[0] == t[1] && t[1] == t[2] && t[3]==t[4]||//brelan + pair
+            t[0] == t[1] && t[2] == t[3]&&t[3]==t[4]) {//paire+brelan
                 s.setScore(j.getJoueur(), 25);
             } else {
                 s.setScore(j.getJoueur(), 0);
             }
-        }
+
     }
 
-    public void Psuite(int t[], int joueur) {//version propre
+    public void Psuite(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
     // gestion des doublons
         for (int i = 0; i <t.length-1 ; i++) {
             if(t[i]==t[i+1]){t[i+1]=8;}
@@ -104,7 +111,7 @@ public class Model {
 
     }
 
-    public void Gsuite(int t[], int joueur) {//version propre
+    public void Gsuite(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
         for (int i = 0; i < 1; i++) {
             if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 && t[i+3]==t[i+4]-1 ) {
                 s.setScore(j.getJoueur(), 40);
@@ -203,22 +210,14 @@ public class Model {
     }
 
     //fonction pour verifié si toutes les case sont remplis donc que la partie est terminé.
-    public void verifcase(Fenetre fen) {
-
-        for (int i = 0; i < 22; i++) {
-            for (int k = 0; k < 22; k++) {
-
-                String comp= fen.esp[i][k].getText();
-                if (comp != "_"&& comp!=" ") {
-                    caseActu=caseActu+1;
-					System.out.println(caseActu);
-                }
-                if(caseActu==TabRemp){
+    public void verifTour(Fenetre fen) {
+        tour=tour+1;
+                if(tour==13*j.getNbJoueur()){
                     System.out.println("PARTIE TERMINE");
-					fen.creerDialogue("partie finis");
+					fen.creerDialogue("Voulez vous continuez ?");
                 }
-            }
-        }
+
+
     }
         //fonction a reviser pour le l'affichage du joueur
     public String nomjoueur(int joueur) {

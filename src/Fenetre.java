@@ -35,6 +35,8 @@ public class Fenetre extends JFrame {
     protected ControlMenu control2 = new ControlMenu(this);
     protected ImageIcon listeImages[] = new ImageIcon[7];
 
+    //parti du panneau
+    protected JButton restart,stop;
 
 
     public Fenetre(Model model) {
@@ -88,20 +90,26 @@ public class Fenetre extends JFrame {
         TotalCinq.addActionListener(controlA);
         TotalSix = new JButton("Total des SIX");
         TotalSix.addActionListener(controlA);
-        Brelan = new JButton("Brelan - Total des 5 dés");
+        Brelan = new JButton("Brelan");
         Brelan.addActionListener(controlA);
-        Carre = new JButton("Carré - Total des 5 dés");
+        Carre = new JButton("Carré");
         Carre.addActionListener(controlA);
-        Full = new JButton("Full - 25 point");
+        Full = new JButton("Full");
         Full.addActionListener(controlA);
-        PSuite = new JButton("Petite suite - 30 points");
+        PSuite = new JButton("Petite suite");
         PSuite.addActionListener(controlA);
-        GSuite = new JButton("Grande suite - 40 points");
+        GSuite = new JButton("Grande suites");
         GSuite.addActionListener(controlA);
-        Yahtzee = new JButton("Yahtzee - 50 points");
+        Yahtzee = new JButton("Yahtzee");
         Yahtzee.addActionListener(controlA);
-        Chance = new JButton("Chance - Total des 5 dés");
+        Chance = new JButton("Chance");
         Chance.addActionListener(controlA);
+
+        //bouton du panneau de fin
+        restart = new JButton("recommencer");
+        restart.addActionListener(controlA);
+        stop = new JButton("quitter");
+        stop.addActionListener(controlA);
 
 
         //partie sup
@@ -255,14 +263,10 @@ public class Fenetre extends JFrame {
                     esp[j][k].setOpaque(false);
                     esp[j][k].setBackground(Color.red);
 
-                } else if (esp[j][k] == esp[11][k]) {
+                } else if (esp[j][k] == esp[11][k]&&esp[j][k] == esp[12][k]) {
                     esp[j][k].setText(" ");
                     esp[j][k].setOpaque(false);
 
-                }else if (esp[j][k] == esp[12][k]) {
-                    esp[j][k].setText(" ");
-                    System.out.println("esp 11");
-                    esp[j][k].setOpaque(false);
 
                 } else {
                     esp[j][k].setText("_");
@@ -355,7 +359,6 @@ public class Fenetre extends JFrame {
         affichage.add(Capsule1);
         affichage.add(Capsule3);
         affichage.add(Capsule2);
-        //affichage.add(pano);
         JPanel affichage2 = new JPanel();
         affichage2.add(affichage);
 
@@ -365,8 +368,25 @@ public class Fenetre extends JFrame {
 
     public void creerDialogue(String dtexte) {
         JOptionPane d = new JOptionPane();
-        d.showMessageDialog(this, dtexte, "Erreur", JOptionPane.ERROR_MESSAGE);
-        JDialog fenErr = d.createDialog(this, "Erreur");
+        int option =d.showConfirmDialog(this, dtexte, "Fin de partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if(option == JOptionPane.OK_OPTION){
+            model.j.setNbJoueur(model.j.getNbJoueur());
+            pan.removeAll();
+            initcheckText();
+            model.j.initJoueur();
+            model.s.initScore(model.j.getJoueur());
+            model.d.initLancer();
+            System.out.println(model.j.nbJoueur);
+            creerWidget2();
+            pack();
+            setVisible(true);
+            repaint();
+
+        }
+        if(option == JOptionPane.NO_OPTION){
+            this.dispose();
+        }
     }
 
     public void creerMenu() {
