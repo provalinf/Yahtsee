@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -6,6 +8,8 @@ import java.util.Random;
 public class De {
     protected int lancer;
     protected int sortie[];
+    protected Image face;
+    protected ImageIcon ii;
 
     public De(){
         int lancer=0;
@@ -40,4 +44,43 @@ public class De {
     public void initLancer(){lancer=0;}
     //initialisation du score
 
+    public Image getFace(int i){
+
+        switch (i)
+        {
+            case 1:
+                 ii= new ImageIcon("images/1.png");
+                face = ii.getImage();
+                ;
+                break;
+            case 2:
+                ii = new ImageIcon("images/2.png");
+                face = ii.getImage();
+
+                break;
+            case 3:
+                ii = new ImageIcon("images/3.png");
+                face = ii.getImage();
+
+                break;
+            case 4:
+                ii = new ImageIcon("images/4.png");
+                face = ii.getImage();
+
+                break;
+            case 5:
+                ii = new ImageIcon("images/5.png");
+                face = ii.getImage();
+
+            case 6:
+                ii = new ImageIcon("images/6.png");
+                face = ii.getImage();
+
+                break;
+
+            default:
+                System.out.println("Il faut davantage travailler.");
+        }
+        return face;
+    }
 }

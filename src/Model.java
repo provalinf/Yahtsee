@@ -18,13 +18,10 @@ public class Model {
     protected Score s;
     protected int v, w, x, y, z, type;
     protected int tri[];
+    public int DELAY=4;
+    protected Image parchemin;
 
-    protected ImageIcon face[]={new ImageIcon("/images/0.png"),//premier image vide pour que la liste icone sois correct
-            new ImageIcon("/images/1.png"),new ImageIcon("/images/2.png")
-            ,new ImageIcon("/images/3.png"),new ImageIcon("/images/4.png")
-            ,new ImageIcon("/images/5.png"),new ImageIcon("/images/6.png")};//non utilisé a integré dans version 2
-
-    protected ArrayList<Image> de0, de1, de2, de3, de4, de5, de6;
+    protected ArrayList<Image> de0;
     Toolkit tk = Toolkit.getDefaultToolkit();
 
     String cho="";
@@ -41,6 +38,8 @@ public class Model {
         for (int i = 0; i <j.getJoueur() ; i++) {//initialisation de case en bool pour la prime de 35
             s.initPrimeTrenteCinq(i);
         }
+
+        parchemin = new ImageIcon("images/parchemin.jpg").getImage();
     }
 
     //petit reset de case dans la partir de lancer
@@ -266,8 +265,18 @@ public class Model {
         Fen.A5.setEnabled(true);
     }
 
+    public Image getParchemin(){return parchemin;}
 
+    public void initforAll(){
+        for (int i = 0; i <j.getNbJoueur() ; i++) {
+            s.initScoreTotal(i);
+            s.initScore(i);
+            s.initTotalScoreBas(i);
+            s.initTotalScoreHaut(i);
+            s.initPrimeTrenteCinq(i);
 
+        }
+    }
 }
 
 
