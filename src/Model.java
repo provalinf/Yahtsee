@@ -267,16 +267,7 @@ public class Model {
 
     public Image getParchemin(){return parchemin;}
 
-    public void initforAll(){
-        for (int i = 0; i <j.getNbJoueur() ; i++) {
-            s.initScoreTotal(i);
-            s.initScore(i);
-            s.initTotalScoreBas(i);
-            s.initTotalScoreHaut(i);
-            s.initPrimeTrenteCinq(i);
 
-        }
-    }
 }
 
 

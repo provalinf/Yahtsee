@@ -314,7 +314,7 @@ public class Fenetre extends JFrame {
         System.out.println(model.j.getJoueur());
 
         JPanel partie2= new JPanel(new GridLayout(5,1));
-       // partie2.setBackground(Color.green);
+        partie2.setBackground(Color.green);
 
         JPanel PanoSup = new JPanel(new GridLayout(22, 1));
         PanoSup.add(PanoB1);
@@ -374,9 +374,9 @@ public class Fenetre extends JFrame {
             pan.removeAll();
             initcheckText();
             model.j.initJoueur();
-            model.initforAll();
+            model.s.initScore(model.j.getJoueur());
+            model.s.initTous();
             model.d.initLancer();
-            model.s.initScoreTotal(model.j.getJoueur());
             System.out.println(model.j.nbJoueur);
             creerWidget2();
             pack();
@@ -412,8 +412,8 @@ public class Fenetre extends JFrame {
                 initcheckText();
                 model.j.initJoueur();
                 model.s.initScore(model.j.getJoueur());
+                model.s.initTous();
                 model.d.initLancer();
-                model.s.initScoreTotal(model.j.getJoueur());
                 System.out.println(model.j.nbJoueur);
                 creerWidget2();
                 pack();
@@ -426,7 +426,8 @@ public class Fenetre extends JFrame {
                 pan.removeAll();
                 initcheckText();
                 model.j.initJoueur();
-                model.initforAll();
+                model.s.initScore(model.j.getJoueur());
+                model.s.initTous();
                 model.d.initLancer();
                 creerWidget2();
                 pack();
@@ -439,8 +440,9 @@ public class Fenetre extends JFrame {
                 pan.removeAll();
                 initcheckText();
                 model.j.initJoueur();
+                model.s.initScore(model.j.getJoueur());
+                model.s.initTous();
                 model.d.initLancer();
-                model.initforAll();
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -452,7 +454,8 @@ public class Fenetre extends JFrame {
                 initcheckText();
                 model.j.initJoueur();
                 model.d.initLancer();
-                model.initforAll();
+                model.s.initScore(model.j.getJoueur());
+                model.s.initTous();
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -463,7 +466,8 @@ public class Fenetre extends JFrame {
                 model.j.setNbJoueur(6);
                 initcheckText();
                 model.j.initJoueur();
-                model.initforAll();
+                model.s.initScore(model.j.getJoueur());
+                model.s.initTous();
                 model.d.initLancer();
                 creerWidget2();
                 pack();
