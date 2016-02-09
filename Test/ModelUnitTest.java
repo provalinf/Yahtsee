@@ -6,8 +6,7 @@ import org.junit.Test;
 public class ModelUnitTest {
 
 	@Test
-	public void jetteTest() {
-		Model model = new Model();
-		model.jette();
+	public void brelanTest() {
+
 	}
 }

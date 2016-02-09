@@ -15,7 +15,7 @@ public class Model {
 
     protected Joueur j;
     protected De d;
-    protected Score s;
+    //protected Score s;
     protected int v, w, x, y, z, type;
     protected int tri[];
     public int DELAY=4;
@@ -31,13 +31,13 @@ public class Model {
     public Model() {
         j = new Joueur();
         d = new De();
-        s = new Score();
+        //s = new Score();
         tri = new int[5];
         TabRemp=19*j.getNbJoueur();
         tour=0;
-        for (int i = 0; i <j.getJoueur() ; i++) {//initialisation de case en bool pour la prime de 35
+       /* for (int i = 0; i <j.getJoueur() ; i++) {//initialisation de case en bool pour la prime de 35
             s.initPrimeTrenteCinq(i);
-        }
+        }*/
 
         parchemin = new ImageIcon("images/parchemin.jpg").getImage();
     }
@@ -60,9 +60,9 @@ public class Model {
         for (int i = 0; i <=2 ; i++) {
 
             if (t[i] == t[1+1] && t[i+1] == t[i+2]) {
-                s.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2])*3);
+                j.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2])*3);
             } else {
-                s.setScore(j.getJoueur(), 0);
+                j.setScore(j.getJoueur(), 0);
             }
         }
 
@@ -73,9 +73,9 @@ public class Model {
         for (int i = 0; i <=1 ; i++) {
 
             if (t[i] == t[1+1] && t[i+1] == t[i+2]&& t[i+2] == t[i+3]) {
-                s.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2]+t[i+3])*4);
+                j.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2]+t[i+3])*4);
             } else {
-                s.setScore(j.getJoueur(), 0);
+                j.setScore(j.getJoueur(), 0);
             }
         }
 
@@ -85,9 +85,9 @@ public class Model {
     public void full(int t[], int joueur) {
             if (t[0] == t[1] && t[1] == t[2] && t[3]==t[4]||//brelan + pair
             t[0] == t[1] && t[2] == t[3]&&t[3]==t[4]) {//paire+brelan
-                s.setScore(j.getJoueur(), 25);
+                j.setScore(j.getJoueur(), 25);
             } else {
-                s.setScore(j.getJoueur(), 0);
+                j.setScore(j.getJoueur(), 0);
             }
 
     }
@@ -101,9 +101,9 @@ public class Model {
         //verif de suite
         for (int i = 0; i < 2; i++) {
             if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 ) {
-                s.setScore(j.getJoueur(), 30);
+                j.setScore(j.getJoueur(), 30);
             } else {
-                s.setScore(j.getJoueur(), 0);
+                j.setScore(j.getJoueur(), 0);
             }
         }
 
@@ -113,9 +113,9 @@ public class Model {
     public void Gsuite(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
         for (int i = 0; i < 1; i++) {
             if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 && t[i+3]==t[i+4]-1 ) {
-                s.setScore(j.getJoueur(), 40);
+                j.setScore(j.getJoueur(), 40);
             } else {
-                s.setScore(j.getJoueur(), 0);
+                j.setScore(j.getJoueur(), 0);
             }
         }
 
@@ -125,9 +125,9 @@ public class Model {
     public void Yahtzee(int t[], int joueur) {
         int i = 0;
         if (t[i] == t[i + 1] && t[i + 1] == t[i + 2] && t[i + 2] == t[i + 3] && t[i + 3] == t[i + 4]) {
-            s.setScore(j.getJoueur(), 50);
+            j.setScore(j.getJoueur(), 50);
         } else {
-            s.setScore(j.getJoueur(), 0);
+            j.setScore(j.getJoueur(), 0);
         }
 
     }
@@ -138,7 +138,7 @@ public class Model {
         for (int i = 0; i < t.length; i++) {
             somme= somme+t[i];
         }
-        s.setScore(j.getJoueur(), somme);
+        j.setScore(j.getJoueur(), somme);
     }
 
     //verif etajout score de la partie sup
@@ -164,7 +164,7 @@ public class Model {
             z = 0;
         }
 
-        s.setScore(j.getJoueur(), z + x + y + v + w);
+        j.setScore(j.getJoueur(), z + x + y + v + w);
     }
 
     //methode pour partie inf recupe dans un tableau puis tri et enfin comparaison.

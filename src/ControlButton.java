@@ -80,22 +80,22 @@ System.out.print(model.tour);
 
                 fen.lancer.setVisible(true);///remet la touche de lancer
                 model.d.initLancer();//initialise le lancer
-                model.s.initScore(model.j.getJoueur());//initialisation de la somme
+                model.j.initScore(model.j.getJoueur());//initialisation de la somme
                 model.compAdd(fen, 1);//utilise la focntion pour recupere les dés et sortire le totale du lancer
 
-                if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){//mise ne place de la verife si la prime de 35 point est valide
-                    model.s.setTotalScoreHaut(model.j.getJoueur(),35);                                                      ///a repeter pour chaque touche
-                    model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                if(model.j.getTotalScoreHaut(model.j.getJoueur())>=63&&model.j.getTrenteCinq(model.j.getJoueur())==true){//mise ne place de la verife si la prime de 35 point est valide
+                    model.j.setTotalScoreHaut(model.j.getJoueur(),35);                                                      ///a repeter pour chaque touche
+                    model.j.setPrimeTrenteCinq(model.j.getJoueur());
                     fen.esp[8][model.j.getJoueur()].setText("35");
                 }
 
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));////on transforme en string
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));////on transforme en string
                 fen.esp[1][model.j.getJoueur()].setText(esp1);//on insert le text dans la fenetre
                 model.initCase(fen);//on remet les des et les check a zero
-                model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));//on update le score pour la partie haute
-                String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));//transformation en string
-                model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreHaut(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));//on update le score pour la partie haute
+                String trans = Integer.toString(model.j.getTotalScoreHaut(model.j.getJoueur()));//transformation en string
+                model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
                 fen.esp[7][model.j.getJoueur()].setText(trans);//insertion dans fentre
                 fen.esp[9][model.j.getJoueur()].setText(trans);//la aussi
                 fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -123,20 +123,20 @@ System.out.print(model.tour);
                 if (fen.esp[2][model.j.getJoueur()].getText() == "_") {
                 fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd(fen, 2);
-                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
-                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
-                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                    if(model.j.getTotalScoreHaut(model.j.getJoueur())>=63&&model.j.getTrenteCinq(model.j.getJoueur())==true){
+                        model.j.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.j.setPrimeTrenteCinq(model.j.getJoueur());
                         fen.esp[8][model.j.getJoueur()].setText("35");
                     }
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[2][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreHaut(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreHaut(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
                 fen.esp[7][model.j.getJoueur()].setText(trans);
                 fen.esp[9][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -165,21 +165,21 @@ System.out.print(model.tour);
                 if (fen.esp[3][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                     model.d.initLancer();
-                    model.s.initScore(model.j.getJoueur());
+                    model.j.initScore(model.j.getJoueur());
                     model.compAdd(fen, 3);
-                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
-                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
-                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                    if(model.j.getTotalScoreHaut(model.j.getJoueur())>=63&&model.j.getTrenteCinq(model.j.getJoueur())==true){
+                        model.j.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.j.setPrimeTrenteCinq(model.j.getJoueur());
                         fen.esp[8][model.j.getJoueur()].setText("35");
                     }
-                    String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                    String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                     fen.esp[3][model.j.getJoueur()].setText(esp1);
                     model.initCase(fen);
-                    model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                    String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
+                    model.j.setTotalScoreHaut(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                    String trans = Integer.toString(model.j.getTotalScoreHaut(model.j.getJoueur()));
 
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
                     fen.esp[7][model.j.getJoueur()].setText(trans);
                     fen.esp[9][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -205,20 +205,20 @@ System.out.print(model.tour);
                 if (fen.esp[4][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                     model.d.initLancer();
-                    model.s.initScore(model.j.getJoueur());
+                    model.j.initScore(model.j.getJoueur());
                     model.compAdd(fen, 4);
-                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
-                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
-                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                    if(model.j.getTotalScoreHaut(model.j.getJoueur())>=63&&model.j.getTrenteCinq(model.j.getJoueur())==true){
+                        model.j.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.j.setPrimeTrenteCinq(model.j.getJoueur());
                         fen.esp[8][model.j.getJoueur()].setText("35");
                     }
-                    String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                    String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                     fen.esp[4][model.j.getJoueur()].setText(esp1);
                     model.initCase(fen);
-                    model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                    String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    model.j.setTotalScoreHaut(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                    String trans = Integer.toString(model.j.getTotalScoreHaut(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
                     fen.esp[7][model.j.getJoueur()].setText(trans);
                     fen.esp[9][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -246,20 +246,20 @@ System.out.print(model.tour);
                 if (fen.esp[5][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd(fen, 5);
-                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
-                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
-                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                    if(model.j.getTotalScoreHaut(model.j.getJoueur())>=63&&model.j.getTrenteCinq(model.j.getJoueur())==true){
+                        model.j.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.j.setPrimeTrenteCinq(model.j.getJoueur());
                         fen.esp[8][model.j.getJoueur()].setText("35");
                     }
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[5][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreHaut(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreHaut(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
                 fen.esp[7][model.j.getJoueur()].setText(trans);
                 fen.esp[9][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -285,20 +285,20 @@ System.out.print(model.tour);
                 if (fen.esp[6][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                     model.compAdd(fen, 6);
-                    if(model.s.getTotalScoreHaut(model.j.getJoueur())>=63&&model.s.getTrenteCinq(model.j.getJoueur())==true){
-                        model.s.setTotalScoreHaut(model.j.getJoueur(),35);
-                        model.s.setPrimeTrenteCinq(model.j.getJoueur());
+                    if(model.j.getTotalScoreHaut(model.j.getJoueur())>=63&&model.j.getTrenteCinq(model.j.getJoueur())==true){
+                        model.j.setTotalScoreHaut(model.j.getJoueur(),35);
+                        model.j.setPrimeTrenteCinq(model.j.getJoueur());
                         fen.esp[8][model.j.getJoueur()].setText("35");
                     }
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[6][model.j.getJoueur()].setText(esp1);
                     model.initCase(fen);
-                    model.s.setTotalScoreHaut(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                    String trans = Integer.toString(model.s.getTotalScoreHaut(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    model.j.setTotalScoreHaut(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                    String trans = Integer.toString(model.j.getTotalScoreHaut(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
                     fen.esp[7][model.j.getJoueur()].setText(trans);
                     fen.esp[9][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -316,8 +316,6 @@ System.out.print(model.tour);
                    // model.verifcase(fen);
                 }
 
-
-
             }
         ////partie basse be quiet
 
@@ -329,15 +327,15 @@ System.out.print(model.tour);
                 if (fen.esp[13][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 1, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[13][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                    model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                 fen.esp[21][model.j.getJoueur()].setText(trans);
                 fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -363,15 +361,15 @@ System.out.print(model.tour);
                 if (fen.esp[14][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 2, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[14][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                    model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                 fen.esp[21][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -396,15 +394,15 @@ System.out.print(model.tour);
                 if (fen.esp[15][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 3, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[15][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                 fen.esp[21][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -430,15 +428,15 @@ System.out.print(model.tour);
                 if (fen.esp[16][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 4, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[16][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                 fen.esp[21][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -464,15 +462,15 @@ System.out.print(model.tour);
                 if (fen.esp[17][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 5, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[17][model.j.getJoueur()].setText(esp1);
                 model.initCase(fen);
-                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                 fen.esp[21][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -499,19 +497,19 @@ System.out.print(model.tour);
                 if (fen.esp[18][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 6, model.j.getJoueur());
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                     if(esp1!="0"){
                         fen.esp[18][model.j.getJoueur()].setText(esp1);
                     }
                 model.initCase(fen);
                 fen.esp[18][model.j.getJoueur()].setText(esp1);
 
-                model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
-                String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
+                String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                 fen.esp[21][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
@@ -536,24 +534,24 @@ System.out.print(model.tour);
                 if (fen.esp[19][model.j.getJoueur()].getText() == "_") {
                     fen.lancer.setVisible(true);
                 model.d.initLancer();
-                model.s.initScore(model.j.getJoueur());
+                model.j.initScore(model.j.getJoueur());
                 model.compAdd2(fen, 7, model.j.getJoueur());
                     model.initCase(fen);
 
-                String esp1 = Integer.toString(model.s.getScore(model.j.getJoueur()));
+                String esp1 = Integer.toString(model.j.getScore(model.j.getJoueur()));
                 fen.esp[19][model.j.getJoueur()].setText(esp1);
                 //model.initCase(fen);
 
-                    model.s.setTotalScoreBas(model.j.getJoueur(),model.s.getScore(model.j.getJoueur()));
+                    model.j.setTotalScoreBas(model.j.getJoueur(),model.j.getScore(model.j.getJoueur()));
 
-                    String trans = Integer.toString(model.s.getTotalScoreBas(model.j.getJoueur()));
+                    String trans = Integer.toString(model.j.getTotalScoreBas(model.j.getJoueur()));
 
-                    model.s.setScoreTotal(model.j.getJoueur(),model.s.getTotalScoreHaut(model.j.getJoueur()),model.s.getTotalScoreBas(model.j.getJoueur()));
-                    String transToo= Integer.toString(model.s.getScoreTotal(model.j.getJoueur()));
+                    model.j.setScoreTotal(model.j.getJoueur(),model.j.getTotalScoreHaut(model.j.getJoueur()),model.j.getTotalScoreBas(model.j.getJoueur()));
+                    String transToo= Integer.toString(model.j.getScoreTotal(model.j.getJoueur()));
 
                     fen.esp[21][model.j.getJoueur()].setText(trans);
                     fen.esp[22][model.j.getJoueur()].setText(transToo);
-                  //  model.verifcase(fen);*/
+                  //  model.verifcase(fen);
                     model.initcheckFalse(fen);
 
                     if (model.j.getJoueur() != model.j.getNbJoueur()) {
