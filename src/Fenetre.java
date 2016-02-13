@@ -250,9 +250,9 @@ public class Fenetre extends JFrame {
         PanoInfo.add(PanoInfo2);
 
         //grille des joueurs
-        JPanel player = new JPanel(new GridLayout(22, model.j.getNbJoueur()));
+        JPanel player = new JPanel(new GridLayout(22, model.getNbJoueur()));
         for (int j = 0; j <esp.length; j++) {
-            for (int k = 0; k < model.j.getNbJoueur(); k++) {
+            for (int k = 0; k < model.getNbJoueur(); k++) {
 
                 esp[j][k] = new JLabel();
                 // esp[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -352,8 +352,6 @@ public class Fenetre extends JFrame {
         Capsule2.add(partie);
         Capsule2.add(partie2);
 
-
-
         JPanel affichage = new JPanel(new GridLayout(1,4));
         affichage.add(Capsule1);
         affichage.add(Capsule3);
@@ -370,14 +368,14 @@ public class Fenetre extends JFrame {
         int option =d.showConfirmDialog(this, dtexte, "Fin de partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(option == JOptionPane.OK_OPTION){
-            model.j.setNbJoueur(model.j.getNbJoueur());
+            model.setNbJoueur(model.getNbJoueur());
             pan.removeAll();
             initcheckText();
-            model.j.initJoueur();
-            model.j.initScore(model.j.getJoueur());
-            model.j.initTous();
+           // model.j.initJoueur();
+           // model.j.initScore(model.getJoueur());
+            //model.j.initTous();
             model.d.initLancer();
-            System.out.println(model.j.nbJoueur);
+            System.out.println(model.nbJoueur);
             creerWidget2();
             pack();
             setVisible(true);
@@ -407,14 +405,16 @@ public class Fenetre extends JFrame {
 
         switch(Version){
             case 1:
-                model.j.setNbJoueur(2);
+                model.setNbJoueur(2);
                 pan.removeAll();
                 initcheckText();
-                model.j.initJoueur();
+                model.d.initLancer();
+                model.newListe(model.nbJoueur);
+                /*model.j.initJoueur();
                 model.j.initScore(model.j.getJoueur());
                 model.j.initTous();
                 model.d.initLancer();
-                System.out.println(model.j.nbJoueur);
+                System.out.println(model.j.nbJoueur);*/
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -422,13 +422,11 @@ public class Fenetre extends JFrame {
                 break;
 
             case 2:
-                model.j.setNbJoueur(3);
+                model.setNbJoueur(3);
                 pan.removeAll();
                 initcheckText();
-                model.j.initJoueur();
-                model.j.initScore(model.j.getJoueur());
-                model.j.initTous();
                 model.d.initLancer();
+                model.newListe(model.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -436,13 +434,10 @@ public class Fenetre extends JFrame {
                 break;
 
             case 3:
-                model.j.setNbJoueur(4);
+                model.setNbJoueur(4);
                 pan.removeAll();
-                initcheckText();
-                model.j.initJoueur();
-                model.j.initScore(model.j.getJoueur());
-                model.j.initTous();
                 model.d.initLancer();
+                model.newListe(model.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -450,12 +445,10 @@ public class Fenetre extends JFrame {
 
             case 4:
                 pan.removeAll();
-                model.j.setNbJoueur(5);
+                model.setNbJoueur(5);
                 initcheckText();
-                model.j.initJoueur();
                 model.d.initLancer();
-                model.j.initScore(model.j.getJoueur());
-                model.j.initTous();
+                model.newListe(model.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -463,12 +456,10 @@ public class Fenetre extends JFrame {
 
             case 5:
                 pan.removeAll();
-                model.j.setNbJoueur(6);
+                model.setNbJoueur(6);
                 initcheckText();
-                model.j.initJoueur();
-                model.j.initScore(model.j.getJoueur());
-                model.j.initTous();
                 model.d.initLancer();
+                model.newListe(model.nbJoueur);
                 creerWidget2();
                 pack();
                 setVisible(true);

@@ -3,91 +3,69 @@
  */
 public class Joueur {
     protected int J;
-    protected int nbJoueur;
-    protected int score[];
-    protected int totalScoreHaut[];
-    protected int totalScoreBas[];
-    protected  boolean primeTrenteCinq[];
-    protected int scoreTotal[];
+    protected int score;
+    protected  int numero;
+    protected int totalScoreHaut;
+    protected int totalScoreBas;
+    protected  boolean primeTrenteCinq;
+    protected int scoreTotal;
 
-    public Joueur(){
-        J=0;
-        nbJoueur=2;
-        score = new int[6];
-        totalScoreBas = new int[6];
-        totalScoreHaut = new int[6];
-        scoreTotal = new int[6];
-        primeTrenteCinq =new boolean[6];
+    public Joueur(int n){
+        this.J= n;
+        score = 0;
+        numero = n+1;
+        totalScoreBas = 0;
+        totalScoreHaut = 0;
+        scoreTotal = 0;
+        primeTrenteCinq = true ;
 
     }
-
-    /*public Score(boolean[] trenteCinq) {
-
-        score = new int[6];
-        totalScoreBas = new int[6];
-        totalScoreHaut = new int[6];
-        scoreTotal = new int[6];
-        primeTrenteCinq = new boolean[6];
-        for (int i = 0; i < 6; i++) {
-            primeTrenteCinq[i] = trenteCinq[i];
-        }
-
-    }*/
-
-
+    public int getNum(){return this.numero;}
     //fonction basique pour la recupe et l'update du score des cases et l'initialisation biensure
-    public int getScore(int i){return score[i];}
+    public int getScore(){return this.score;}
 
-    public void setScore(int i, int point){ score[i]=score[i]+point;}
+    public void setScore(int point){ this.score= this.score+point;}
 
-    public void initScore(int i){score[i]=0;}
+    public void initScore(){score=0;}
 
     //fonction pour le prime de 35
-    public Boolean getTrenteCinq(int j){
-        return primeTrenteCinq[j];
+    public Boolean getTrenteCinq(){
+        return this.primeTrenteCinq;
     }
 
-    public void initPrimeTrenteCinq(int j){
-        primeTrenteCinq[j]= true;
+    public void initPrimeTrenteCinq(){
+        this.primeTrenteCinq= true;
     }
 
-    public void setPrimeTrenteCinq(int j){
-        primeTrenteCinq[j]= false;
+    public void setPrimeTrenteCinq(){
+        this.primeTrenteCinq= false;
     }
 
-    public int getTotalScoreHaut(int i){return totalScoreHaut[i];}
+    public int getTotalScoreHaut(){return this.totalScoreHaut;}
 
-    public void setTotalScoreHaut(int i, int point){ totalScoreHaut[i]=totalScoreHaut[i]+point;}
+    public void setTotalScoreHaut(int point){ this.totalScoreHaut=this.totalScoreHaut+point;}
     //et le bas
-    public int getTotalScoreBas(int i){return totalScoreBas[i];}
+    public int getTotalScoreBas(){return this.totalScoreBas;}
 
-    public void setTotalScoreBas(int i, int point){ totalScoreBas[i]=totalScoreBas[i]+point;}
+    public void setTotalScoreBas(int point){ this.totalScoreBas=this.totalScoreBas+point;}
 
     //et le score final
-    public int getScoreTotal(int i){return scoreTotal[i];}
+    public int getScoreTotal(){return this.scoreTotal;}
 
-    public void setScoreTotal(int i,int j,int k){ scoreTotal[i]=j+k;}///on remplis la case final avec le sore total du haut et bas
-    //public void setScoreTotal(int i,int j,int k){ scoreTotal[i]=scoreTotal[i]+j+k;}
+    public void setScoreTotal(int j){ this.scoreTotal=this.scoreTotal+j;}///on remplis la case final avec le sore total du haut et bas
 
-    public void initTous(){//initialisation detous les scores
+   /* public void initTous(){//initialisation detous les scores
         for (int j = 0; j < 6; j++) {
             scoreTotal[j]=0;
             totalScoreHaut[j]=0;
             totalScoreBas[j]=0;
         }
-    }
+    }*/
     //ok
-    public int getJoueur(){return J;}
+    public int getJoueur(){return this.J;}
     //ok
-    public void setJoueur(){J=J+1;}
+    //public void setJoueur(){this.J=J+1;}
     //ok
-    public void initJoueur(){J=0;}
+    //public void initJoueur(){J=0;}
 
-    public int getNbJoueur(){
-        return nbJoueur;
-    }
-    //fonction pour definir le nb de joueur
-    public void setNbJoueur(int i){
-        nbJoueur=i;
-    }
 }

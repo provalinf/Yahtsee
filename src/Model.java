@@ -1,45 +1,69 @@
+
 import com.sun.deploy.util.SystemUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by nico on 08/11/15.
  */
 public class Model {
 
+
     protected Joueur j;
+    protected LinkedList<Joueur>participant;
+    protected int nbJoueur;
     protected De d;
     //protected Score s;
     protected int v, w, x, y, z, type;
     protected int tri[];
     public int DELAY=4;
-    protected Image parchemin;
-
-    protected ArrayList<Image> de0;
-    Toolkit tk = Toolkit.getDefaultToolkit();
-
+    int flag;
+    boolean commut;
     String cho="";
     int TabRemp;
     int tour;
+    public int t;
 
     public Model() {
-        j = new Joueur();
-        d = new De();
-        //s = new Score();
-        tri = new int[5];
-        TabRemp=19*j.getNbJoueur();
-        tour=0;
-       /* for (int i = 0; i <j.getJoueur() ; i++) {//initialisation de case en bool pour la prime de 35
-            s.initPrimeTrenteCinq(i);
-        }*/
+        nbJoueur = 2;
+        participant = new LinkedList<>();
+        for (int i = 0; i < nbJoueur; i++) {
 
-        parchemin = new ImageIcon("images/parchemin.jpg").getImage();
+            j = new Joueur(i);
+            participant.add(j);
+        }
+
+        d = new De();
+        tri = new int[5];
+        TabRemp=19*nbJoueur;
+        tour=0;
+        t = 0;
+    }
+
+    public int getNbJoueur(){
+        return nbJoueur;
+    }
+
+    //fonction pour definir le nb de joueur
+    public void setNbJoueur(int i){
+        nbJoueur=i;
+    }
+
+    public void videList(){ participant.clear();}
+    public void resetT(){t=0;}
+
+    public void newListe(int nbJoueur){
+        resetT();
+        participant.clear();
+
+        for (int i = 0; i < nbJoueur; i++) {
+            j = new Joueur(i);
+            participant.add(j);
+
+        }
     }
 
     //petit reset de case dans la partir de lancer
@@ -56,44 +80,52 @@ public class Model {
         fen.A5.setSelected(false);
     }
 
-    public void brelan(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
+    public int brelan(int t[]) {//corrigé le comptage des point est maintenant correct et propre
+        int result=0;
+        System.out.println("entrez brelant "+result);
         for (int i = 0; i <=2 ; i++) {
 
-            if (t[i] == t[1+1] && t[i+1] == t[i+2]) {
-                j.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2])*3);
-            } else {
-                j.setScore(j.getJoueur(), 0);
-            }
-        }
+            if (t[i] == t[i+1] && t[i+1] == t[i+2]) {
 
+                result=((t[i]+t[i+1]+t[i+2])*3);
+                break;
+            } else {
+                result = 0;
+            }
+        }System.out.println(" sortie brelan "+result);
+        return result;
     }
 
-    public void carre(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
-
+    public int carre(int t[]) {//corrigé le comptage des point est maintenant correct et propre
+        int result=0;
         for (int i = 0; i <=1 ; i++) {
 
             if (t[i] == t[1+1] && t[i+1] == t[i+2]&& t[i+2] == t[i+3]) {
-                j.setScore(j.getJoueur(),(t[i]+t[i+1]+t[i+2]+t[i+3])*4);
+                result = ((t[i]+t[i+1]+t[i+2]+t[i+3])*4);
+                break;
             } else {
-                j.setScore(j.getJoueur(), 0);
+                result = 0;
             }
         }
-
+        return result;
     }
 
 
-    public void full(int t[], int joueur) {
+    public int full(int t[]) {
+        int result = 0;
             if (t[0] == t[1] && t[1] == t[2] && t[3]==t[4]||//brelan + pair
             t[0] == t[1] && t[2] == t[3]&&t[3]==t[4]) {//paire+brelan
-                j.setScore(j.getJoueur(), 25);
+                result = 25;
             } else {
-                j.setScore(j.getJoueur(), 0);
+                result = 0;
             }
-
+        return result;
     }
 
-    public void Psuite(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
+    public int Psuite(int t[]) {//corrigé le comptage des point est maintenant correct et propre
     // gestion des doublons
+        int result = 0;
+
         for (int i = 0; i <t.length-1 ; i++) {
             if(t[i]==t[i+1]){t[i+1]=8;}
         }
@@ -101,48 +133,54 @@ public class Model {
         //verif de suite
         for (int i = 0; i < 2; i++) {
             if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 ) {
-                j.setScore(j.getJoueur(), 30);
+                result = 30;
+                break;
             } else {
-                j.setScore(j.getJoueur(), 0);
+                result = 0;
             }
         }
-
+        return result;
 
     }
 
-    public void Gsuite(int t[], int joueur) {//corrigé le comptage des point est maintenant correct et propre
+    public int Gsuite(int t[]) {//corrigé le comptage des point est maintenant correct et propre
+        int result = 0;
         for (int i = 0; i < 1; i++) {
             if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 && t[i+3]==t[i+4]-1 ) {
-                j.setScore(j.getJoueur(), 40);
+                result = 40;
+                break;
             } else {
-                j.setScore(j.getJoueur(), 0);
+                result = 0;
             }
         }
-
+        return result;
     }
 
-
-    public void Yahtzee(int t[], int joueur) {
+    public int Yahtzee(int t[]) {
+        int result = 0;
         int i = 0;
         if (t[i] == t[i + 1] && t[i + 1] == t[i + 2] && t[i + 2] == t[i + 3] && t[i + 3] == t[i + 4]) {
-            j.setScore(j.getJoueur(), 50);
+            result = 50;
         } else {
-            j.setScore(j.getJoueur(), 0);
+            result = 0;
         }
-
+        return result;
     }
 
-    public void Chance(int t[], int joueur) {
+    public int Chance(int t[]) {
+        int result = 0;
         int somme=0;
 
         for (int i = 0; i < t.length; i++) {
             somme= somme+t[i];
         }
-        j.setScore(j.getJoueur(), somme);
+        result  = somme;
+        return result;
     }
 
     //verif etajout score de la partie sup
-    public void compAdd(Fenetre fen, int i) {
+    public int compAdd(Fenetre fen, int i) {
+        int somme = 0;
         v = Integer.parseInt(fen.dé1.getText());
         w = Integer.parseInt(fen.dé2.getText());
         x = Integer.parseInt(fen.dé3.getText());
@@ -164,12 +202,14 @@ public class Model {
             z = 0;
         }
 
-        j.setScore(j.getJoueur(), z + x + y + v + w);
+        somme = z + x + y + v + w;
+        return somme;
     }
 
     //methode pour partie inf recupe dans un tableau puis tri et enfin comparaison.
     //explication fen,pas besoin, C c'est le numero de ce qu'on veut verifier, joueur le num du joueur
-    public void compAdd2(Fenetre fen, int c, int joueur) {
+    public int compAdd2(Fenetre fen, int c) {
+        int somme = 0;
         tri[0] = Integer.parseInt(fen.dé1.getText());
         tri[1] = Integer.parseInt(fen.dé2.getText());
         tri[2] = Integer.parseInt(fen.dé3.getText());
@@ -177,41 +217,41 @@ public class Model {
         tri[4] = Integer.parseInt(fen.dé5.getText());
         type = c;
         Arrays.sort(tri);///on tri le tableau
+        for (int i = 0; i <tri.length ; i++) {
+            System.out.println("debut de reception "+tri[i]);
+        }
 
         switch (type) {//et selon ce qu'on veut verifier on donne le numero
             case 1://case du brelan
-                brelan(tri, j.getJoueur());
+                somme = brelan(tri);
                 break;
             case 2:
-                carre(tri, j.getJoueur());
+                somme = carre(tri);
                 break;
             case 3:
-                full(tri, j.getJoueur());
+                somme = full(tri);
                 break;
             case 4:
-                Psuite(tri, j.getJoueur());
+                somme = Psuite(tri);
                 break;
             case 5:
-                Gsuite(tri, j.getJoueur());
+                somme = Gsuite(tri);
                 break;
             case 6:
-                Yahtzee(tri, j.getJoueur());
+                somme = Yahtzee(tri);
                 break;
             case 7:
-                Chance(tri, j.getJoueur());
+                somme = Chance(tri);
                 break;
         }
-
-        for (int i = 0; i < tri.length; i++) {
-            System.out.print(tri[i]);
-        }
+        return somme;
 
     }
 
     //fonction pour verifié si toutes les case sont remplis donc que la partie est terminé.
     public void verifTour(Fenetre fen) {
         tour=tour+1;
-                if(tour==13*j.getNbJoueur()){
+                if(tour==13*nbJoueur){
                     System.out.println("PARTIE TERMINE");
 					fen.creerDialogue("Voulez vous continuez ?");
                 }
@@ -256,7 +296,6 @@ public class Model {
     Fen.A5.setEnabled(false);
     }
 
-
     public void initcheckTrue(Fenetre Fen){{
         Fen.A1.setEnabled(true);}
         Fen.A2.setEnabled(true);
@@ -264,8 +303,6 @@ public class Model {
         Fen.A4.setEnabled(true);
         Fen.A5.setEnabled(true);
     }
-
-    public Image getParchemin(){return parchemin;}
 
 
 }
