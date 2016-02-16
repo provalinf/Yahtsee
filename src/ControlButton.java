@@ -76,7 +76,7 @@ public class ControlButton implements ActionListener{
             if (model.t == model.participant.size()) {
                 model.t = 0;
             }
-            System.out.println("t  = " + model.t + " joueur " + model.participant.get(model.t) + " taille de liste : " + model.participant.size());
+
             if (fen.esp[1][model.participant.get(model.t).getJoueur()].getText() == "_") {//le if est pour éviter d'écrire deux fois dans la même case
                 fen.lancer.setVisible(true);///remet la touche de lancer
                 model.d.initLancer();//initialise le lancer
@@ -103,7 +103,6 @@ public class ControlButton implements ActionListener{
 
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t 1end=" + model.t);
                     model.verifTour(fen);
                 }
                 fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
@@ -151,7 +150,6 @@ public class ControlButton implements ActionListener{
 
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
             } else {
@@ -200,7 +198,6 @@ public class ControlButton implements ActionListener{
 
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
             } else {
@@ -244,7 +241,6 @@ public class ControlButton implements ActionListener{
 
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
             } else {
@@ -255,7 +251,6 @@ public class ControlButton implements ActionListener{
 
         if (e.getSource() == fen.TotalCinq) {
 
-            System.out.println("5 actif");
             if (model.t == model.participant.size()) {
                 model.t = 0;
             }
@@ -289,14 +284,12 @@ public class ControlButton implements ActionListener{
 
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
             } else {
                 fen.Info3.setText("Impossible case deja joué");
             }
 
-            System.out.println("5 actif");
         }
 
         if (e.getSource() == fen.TotalSix) {
@@ -334,7 +327,6 @@ public class ControlButton implements ActionListener{
 
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
             } else {
@@ -407,7 +399,6 @@ public class ControlButton implements ActionListener{
                 // model.verifcase(fen);
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
                 //fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
@@ -441,7 +432,6 @@ public class ControlButton implements ActionListener{
                 // model.verifcase(fen);
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
                 //fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
@@ -476,7 +466,6 @@ public class ControlButton implements ActionListener{
                 // model.verifcase(fen);
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
                 //fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
@@ -511,7 +500,6 @@ public class ControlButton implements ActionListener{
                 // model.verifcase(fen);
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
                 //fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
@@ -537,8 +525,13 @@ public class ControlButton implements ActionListener{
                 model.initCase(fen);
                 model.participant.get(model.t).setTotalScoreBas(temp);
                 model.participant.get(model.t).setScoreTotal(temp);
+                if (temp!=0){
+                    model.participant.get(model.t).setScoreTotal(100);
+
+                }
                 String trans = Integer.toString(model.participant.get(model.t).getTotalScoreBas());
                 String transToo = Integer.toString(model.participant.get(model.t).getScoreTotal());
+
 
                 fen.esp[21][model.t].setText(trans);
                 fen.esp[22][model.t].setText(transToo);
@@ -547,7 +540,6 @@ public class ControlButton implements ActionListener{
                 // model.verifcase(fen);
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
                 //fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));
@@ -581,7 +573,6 @@ public class ControlButton implements ActionListener{
                 // model.verifcase(fen);
                 if (model.t != model.participant.size()) {
                     model.t = model.t + 1;
-                    System.out.println("t end =" + model.t);
                     model.verifTour(fen);
                 }
                 //fen.Info3.setText(model.nomjoueur(model.j.getJoueur()));

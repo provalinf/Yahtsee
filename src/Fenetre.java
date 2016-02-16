@@ -368,14 +368,14 @@ public class Fenetre extends JFrame {
         int option =d.showConfirmDialog(this, dtexte, "Fin de partie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if(option == JOptionPane.OK_OPTION){
+            model.initTour();
+            model.participant.clear();
             model.setNbJoueur(model.getNbJoueur());
+            model.newListe(model.nbJoueur);
             pan.removeAll();
             initcheckText();
-           // model.j.initJoueur();
-           // model.j.initScore(model.getJoueur());
-            //model.j.initTous();
+            lancer.setVisible(true);
             model.d.initLancer();
-            System.out.println(model.nbJoueur);
             creerWidget2();
             pack();
             setVisible(true);
@@ -407,14 +407,10 @@ public class Fenetre extends JFrame {
             case 1:
                 model.setNbJoueur(2);
                 pan.removeAll();
+                model.initTour();
                 initcheckText();
                 model.d.initLancer();
                 model.newListe(model.nbJoueur);
-                /*model.j.initJoueur();
-                model.j.initScore(model.j.getJoueur());
-                model.j.initTous();
-                model.d.initLancer();
-                System.out.println(model.j.nbJoueur);*/
                 creerWidget2();
                 pack();
                 setVisible(true);
@@ -425,6 +421,8 @@ public class Fenetre extends JFrame {
                 model.setNbJoueur(3);
                 pan.removeAll();
                 initcheckText();
+                model.initTour();
+                lancer.setVisible(true);
                 model.d.initLancer();
                 model.newListe(model.nbJoueur);
                 creerWidget2();
@@ -437,6 +435,8 @@ public class Fenetre extends JFrame {
                 model.setNbJoueur(4);
                 pan.removeAll();
                 model.d.initLancer();
+                model.initTour();
+                lancer.setVisible(true);
                 model.newListe(model.nbJoueur);
                 creerWidget2();
                 pack();
@@ -447,6 +447,8 @@ public class Fenetre extends JFrame {
                 pan.removeAll();
                 model.setNbJoueur(5);
                 initcheckText();
+                model.initTour();
+                lancer.setVisible(true);
                 model.d.initLancer();
                 model.newListe(model.nbJoueur);
                 creerWidget2();
@@ -458,6 +460,8 @@ public class Fenetre extends JFrame {
                 pan.removeAll();
                 model.setNbJoueur(6);
                 initcheckText();
+                model.initTour();
+                lancer.setVisible(true);
                 model.d.initLancer();
                 model.newListe(model.nbJoueur);
                 creerWidget2();

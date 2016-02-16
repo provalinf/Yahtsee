@@ -24,7 +24,7 @@ public class Model {
     boolean commut;
     String cho="";
     int TabRemp;
-    int tour;
+    int tour=0;
     public int t;
 
     public Model() {
@@ -82,7 +82,6 @@ public class Model {
 
     public int brelan(int t[]) {//corrigé le comptage des point est maintenant correct et propre
         int result=0;
-        System.out.println("entrez brelant "+result);
         for (int i = 0; i <=2 ; i++) {
 
             if (t[i] == t[i+1] && t[i+1] == t[i+2]) {
@@ -92,7 +91,7 @@ public class Model {
             } else {
                 result = 0;
             }
-        }System.out.println(" sortie brelan "+result);
+        }
         return result;
     }
 
@@ -175,8 +174,6 @@ public class Model {
             somme= somme+t[i];
         }
         result  = somme;
-        System.out.println("result"+result);
-        System.out.println("somme"+somme);
         return result;
     }
 
@@ -220,7 +217,6 @@ public class Model {
         type = c;
         Arrays.sort(tri);///on tri le tableau
         for (int i = 0; i <tri.length ; i++) {
-            System.out.println("debut de reception "+tri[i]);
         }
 
         switch (type) {//et selon ce qu'on veut verifier on donne le numero
@@ -253,13 +249,13 @@ public class Model {
     //fonction pour verifié si toutes les case sont remplis donc que la partie est terminé.
     public void verifTour(Fenetre fen) {
         tour=tour+1;
-                if(tour==13*nbJoueur){
-                    System.out.println("PARTIE TERMINE");
+        System.out.println("tour = "+tour);
+                if(tour==14*nbJoueur){
 					fen.creerDialogue("Voulez vous continuez ?");
                 }
-
-
     }
+
+    public void initTour(){tour=0;}
         //fonction a reviser pour le l'affichage du joueur
     public String nomjoueur(int joueur) {
 
