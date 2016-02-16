@@ -565,7 +565,7 @@ public class ControlButton implements ActionListener{
                 fen.lancer.setVisible(true);
                 model.d.initLancer();
                 model.participant.get(model.t).initScore();
-                int temp = model.compAdd2(fen, 6);
+                int temp = model.compAdd2(fen, 7);
                 String esp1 = Integer.toString(temp);
                 fen.esp[19][model.t].setText(esp1);
                 model.initCase(fen);

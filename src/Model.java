@@ -175,6 +175,8 @@ public class Model {
             somme= somme+t[i];
         }
         result  = somme;
+        System.out.println("result"+result);
+        System.out.println("somme"+somme);
         return result;
     }
 
