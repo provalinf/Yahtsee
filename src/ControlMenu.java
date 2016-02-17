@@ -16,7 +16,12 @@ public class ControlMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
 
-        if (e.getSource() == fen.itemInterface1) {
+        if (e.getSource() == fen.itemInterface0) {
+            fen.changerVersion(6);
+            System.out.println(" Humain VS ordi");
+            fen.repaint();
+
+        } else if (e.getSource() == fen.itemInterface1) {
             fen.changerVersion(1);
             System.out.println(" joueur2 ok");
             fen.repaint();

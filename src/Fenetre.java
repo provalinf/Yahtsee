@@ -27,7 +27,7 @@ public class Fenetre extends JFrame {
     protected JCheckBox F1;
     protected JMenuBar menuBar;
     protected JMenu option;
-    protected JMenuItem itemInterface1, itemInterface2,itemInterface3, itemInterface4,itemInterface5, itemComment, itemApropos;
+    protected JMenuItem itemInterface0, itemInterface1, itemInterface2,itemInterface3, itemInterface4,itemInterface5, itemComment, itemApropos;
     protected JMenu itemAide;
     //protected JButton G1;
     protected ControlButton control;
@@ -122,7 +122,8 @@ public class Fenetre extends JFrame {
 
         menuBar = new JMenuBar();
         option = new JMenu("Option");
-        setItemInterface1(new JMenuItem("2 joueurs"));
+        itemInterface0 = new JMenuItem("1 joueur contre LA machine");
+        itemInterface1 = new JMenuItem("2 joueurs");
         itemInterface2 = new JMenuItem("3 joueurs");
         itemInterface3 = new JMenuItem("4 joueurs");
         itemInterface4 = new JMenuItem("5 joueurs");
@@ -131,7 +132,8 @@ public class Fenetre extends JFrame {
         itemComment = new JMenuItem("Comment ça marche?");
         itemApropos = new JMenuItem("A propos");
         // G1.addActionListener((ActionListener) control);
-        getItemInterface1().addActionListener(control2);
+        itemInterface0.addActionListener(control2);
+        itemInterface1.addActionListener(control2);
         itemInterface2.addActionListener(control2);
         itemInterface3.addActionListener(control2);
         itemInterface4.addActionListener(control2);
@@ -252,7 +254,7 @@ public class Fenetre extends JFrame {
         //grille des joueurs
         JPanel player = new JPanel(new GridLayout(22, model.getNbJoueur()));
         for (int j = 0; j <esp.length; j++) {
-            for (int k = 0; k < model.getNbJoueur(); k++) {
+            for (int k = 0; k < model.participant.size(); k++) {
 
                 esp[j][k] = new JLabel();
                 // esp[j][k].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -311,7 +313,6 @@ public class Fenetre extends JFrame {
         partie.add(PartieD5);
         partie.add(PartieD6);
         partie.add(PanoInfo);
-        System.out.println(model.j.getJoueur());
 
         JPanel partie2= new JPanel(new GridLayout(5,1));
         partie2.setBackground(Color.green);
@@ -389,7 +390,9 @@ public class Fenetre extends JFrame {
 
     public void creerMenu() {
         JMenuBar menuBar = new JMenuBar();
-        option.add(getItemInterface1());
+
+        option.add(itemInterface0);
+        option.add(itemInterface1);
         option.add(itemInterface2);
         option.add(itemInterface3);
         option.add(itemInterface4);
@@ -404,6 +407,19 @@ public class Fenetre extends JFrame {
     public void changerVersion(int Version) {
 
         switch(Version){
+            case 6:
+                model.setNbJoueur(1);
+                pan.removeAll();
+                model.initTour();
+                initcheckText();
+                model.d.initLancer();
+                model.newListe(model.nbJoueur);
+                creerWidget2();
+                pack();
+                setVisible(true);
+                repaint();
+                break;
+
             case 1:
                 model.setNbJoueur(2);
                 pan.removeAll();

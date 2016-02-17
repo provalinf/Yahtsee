@@ -13,6 +13,7 @@ public class Model {
 
 
     protected Joueur j;
+    protected Robo r;
     protected LinkedList<Joueur>participant;
     protected int nbJoueur;
     protected De d;
@@ -30,11 +31,16 @@ public class Model {
     public Model() {
         nbJoueur = 2;
         participant = new LinkedList<>();
-        for (int i = 0; i < nbJoueur; i++) {
+        if(nbJoueur>=2) {
+            for (int i = 0; i < nbJoueur; i++) {
 
-            j = new Joueur(i);
+                j = new Joueur(i);
+                participant.add(j);
+            }
+        }else{ j = new Joueur(0);
+            r = new Robo (1);
             participant.add(j);
-        }
+            participant.add(r);}
 
         d = new De();
         tri = new int[5];
@@ -58,11 +64,18 @@ public class Model {
     public void newListe(int nbJoueur){
         resetT();
         participant.clear();
-
-        for (int i = 0; i < nbJoueur; i++) {
-            j = new Joueur(i);
+        if(nbJoueur==1){
+            j = new Joueur(0);
+            r = new Robo(1);
             participant.add(j);
+            participant.add(r);
+        }
+        else {
+            for (int i = 0; i < nbJoueur; i++) {
+                j = new Joueur(i);
+                participant.add(j);
 
+            }
         }
     }
 
