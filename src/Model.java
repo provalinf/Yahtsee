@@ -38,7 +38,7 @@ public class Model {
                 participant.add(j);
             }
         }else{ j = new Joueur(0);
-            r = new Robo (1);
+            r = new Robo (1,this);
             participant.add(j);
             participant.add(r);}
 
@@ -66,7 +66,7 @@ public class Model {
         participant.clear();
         if(nbJoueur==1){
             j = new Joueur(0);
-            r = new Robo(1);
+            r = new Robo(1,this);
             participant.add(j);
             participant.add(r);
         }
@@ -95,11 +95,12 @@ public class Model {
 
     public int brelan(int t[]) {//corrigé le comptage des point est maintenant correct et propre
         int result=0;
+        Arrays.sort(t);
         for (int i = 0; i <=2 ; i++) {
 
             if (t[i] == t[i+1] && t[i+1] == t[i+2]) {
 
-                result=((t[i]+t[i+1]+t[i+2])*3);
+                result=(t[0]+t[1]+t[2]+t[3]+t[4]);
                 break;
             } else {
                 result = 0;
@@ -110,10 +111,11 @@ public class Model {
 
     public int carre(int t[]) {//corrigé le comptage des point est maintenant correct et propre
         int result=0;
+        Arrays.sort(t);
         for (int i = 0; i <=1 ; i++) {
 
             if (t[i] == t[1+1] && t[i+1] == t[i+2]&& t[i+2] == t[i+3]) {
-                result = ((t[i]+t[i+1]+t[i+2]+t[i+3])*4);
+                result = (t[0]+t[1]+t[2]+t[3]+t[4]);
                 break;
             } else {
                 result = 0;
@@ -125,6 +127,7 @@ public class Model {
 
     public int full(int t[]) {
         int result = 0;
+        Arrays.sort(t);
             if (t[0] == t[1] && t[1] == t[2] && t[3]==t[4]||//brelan + pair
             t[0] == t[1] && t[2] == t[3]&&t[3]==t[4]) {//paire+brelan
                 result = 25;
@@ -157,6 +160,7 @@ public class Model {
 
     public int Gsuite(int t[]) {//corrigé le comptage des point est maintenant correct et propre
         int result = 0;
+        Arrays.sort(t);
         for (int i = 0; i < 1; i++) {
             if (t[i]==t[i+1]-1 && t[i+1]==t[i+2]-1 && t[i+2]==t[i+3]-1 && t[i+3]==t[i+4]-1 ) {
                 result = 40;
